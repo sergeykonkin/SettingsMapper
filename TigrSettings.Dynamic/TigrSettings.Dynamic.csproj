@@ -7,7 +7,7 @@
 		<Product>TigrSettings</Product>
 		<Description>DynamicSettingsBuidlder for TigrSettings.</Description>
 		<Copyright>Copyright (c) 2018 Sergey Konkin</Copyright>
-		<PackageLicenseUrl>https://github.com/sergeykonkin/TigrSettings/blob/master/LICENSE</PackageLicenseUrl>
+		<PackageLicenseUrl>https://raw.githubusercontent.com/sergeykonkin/TigrSettings/master/LICENSE</PackageLicenseUrl>
 		<PackageProjectUrl>https://github.com/sergeykonkin/TigrSettings</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/sergeykonkin/TigrSettings</RepositoryUrl>
 		<PackageTags>app.config web.config settings</PackageTags>
