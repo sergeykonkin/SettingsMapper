@@ -2,8 +2,15 @@
 
 	<PropertyGroup>
 		<TargetFramework>netstandard2.0</TargetFramework>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<Authors>Sergey Konkin</Authors>
+		<Product>TigrSettings</Product>
+		<Description>Simple yet extensible .NET Standard 2.0 library for mapping settings to strong types.</Description>
+		<Copyright>Copyright (c) 2018 Sergey Konkin</Copyright>
+		<PackageLicenseUrl>https://github.com/sergeykonkin/TigrSettings/blob/master/LICENSE</PackageLicenseUrl>
+		<PackageProjectUrl>https://github.com/sergeykonkin/TigrSettings</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/sergeykonkin/TigrSettings</RepositoryUrl>
+		<PackageTags>app.config web.config settings</PackageTags>
 	</PropertyGroup>
-
-
 
 </Project>

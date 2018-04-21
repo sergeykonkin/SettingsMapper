@@ -109,8 +109,24 @@ Custom converter of some type has higher priority than default one, so if some d
 
 
 ## Installing
+Core library:
+```
+Install-Package TigrSettings
+```
 
-TODO.
+`ConfigurationManager` support:
+
+```
+Install-Package TigrSettings.Providers.ConfigurationManager
+```
+
+`DynamicSettingsBuilder<T>` support:
+
+```
+Install-Package TigrSettings.Dynamic
+```
+
+End with an example of getting some data out of the system or using it for a little demo
 
 
 ## Built With

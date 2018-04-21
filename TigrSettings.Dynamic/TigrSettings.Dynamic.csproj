@@ -1,15 +1,24 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+		<Authors>Sergey Konkin</Authors>
+		<Product>TigrSettings</Product>
+		<Description>DynamicSettingsBuidlder for TigrSettings.</Description>
+		<Copyright>Copyright (c) 2018 Sergey Konkin</Copyright>
+		<PackageLicenseUrl>https://github.com/sergeykonkin/TigrSettings/blob/master/LICENSE</PackageLicenseUrl>
+		<PackageProjectUrl>https://github.com/sergeykonkin/TigrSettings</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/sergeykonkin/TigrSettings</RepositoryUrl>
+		<PackageTags>app.config web.config settings</PackageTags>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="ImpromptuInterface" Version="7.0.1" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="ImpromptuInterface" Version="7.0.1" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\TigrSettings\TigrSettings.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\TigrSettings\TigrSettings.csproj" />
+	</ItemGroup>
 
 </Project>
