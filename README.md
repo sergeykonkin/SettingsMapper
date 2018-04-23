@@ -4,7 +4,7 @@ Simple yet extensible .NET Standard 2.0 library for mapping settings to strong t
 
 ## Getting Started
 
-**TigrSettings** supports 3 different builders: `PocoSettingsBuilder<T>`, `StaticSettingsBuilder` and `DynamicSettingsBuilder<T>` (within separate `TigrSettings.Dynamic` package).
+**TigrSettings** supports 3 different builders: `PocoSettingsBuilder{T}`, `StaticSettingsBuilder` and `DynamicSettingsBuilder{T}` (within separate `TigrSettings.Dynamic` package).
 
 ### POCO builder
 Lets say we have following `App.config`:
@@ -104,11 +104,11 @@ var dynamicBuilder = new DynamicSettingsBuilder<IAppSettings>(settingsProvider);
 IAppSettings appSettings = dynamicBuilder.Create();
 ```
 
-**Note.** `DynamicSettingsBuilder<T>` located in separate `TigrSettings.Dynamic` package.
+**Note.** `DynamicSettingsBuilder{T}` located in separate `TigrSettings.Dynamic` package.
 
 
 ### Converters
-**TigrSettings** comes with set of default converters,  but if they are not enough, you can implement either `ISettingsProvider` interface or `SettingValueConverterBase<TValue>` class and pass additional converters to settings builder constructor:
+**TigrSettings** comes with set of default converters,  but if they are not enough, you can implement either `ISettingsProvider` interface or `SettingValueConverterBase{TValue}` class and pass additional converters to settings builder constructor:
 
 ```csharp
 ISettingsProvider myConverter = new MySettingValueConverter();
