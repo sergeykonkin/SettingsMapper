@@ -76,7 +76,7 @@ namespace TigrSettings
 				var stringValue = _settingsProvider.Get(prop.Name);
 				if (string.IsNullOrWhiteSpace(stringValue) && prop.PropertyType.IsNonNullableValueType())
 				{
-					throw new InvalidOperationException("Null value encountered for value type setting.");
+					throw new InvalidOperationException($"Null value encountered for value type setting {prop.Name} (of type {prop.PropertyType}).");
 				}
 
 				if (prop.PropertyType == typeof(string))

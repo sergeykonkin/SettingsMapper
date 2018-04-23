@@ -92,7 +92,7 @@ namespace TigrSettings.Tests
 			var settingsBuilder = new PocoSettingsBuilder<Poco>(settingsProvider.Object, _converter.Object);
 
 			Assert.That(() => settingsBuilder.Create(),
-				Throws.TypeOf<InvalidOperationException>().With.Message.EqualTo("Null value encountered for value type setting.")
+				Throws.TypeOf<InvalidOperationException>().With.Message.AtLeast("Null value encountered for value type setting")
 			);
 		}
 
@@ -105,7 +105,7 @@ namespace TigrSettings.Tests
 			var settingsBuilder = new PocoSettingsBuilder<PocoWithUnknownType>(settingsProvider.Object, _converter.Object);
 
 			Assert.That(() => settingsBuilder.Create(),
-				Throws.TypeOf<NotSupportedException>().With.Message.EqualTo($"No setting value converter found for '{typeof(UnknownType).Name}' type.")
+				Throws.TypeOf<NotSupportedException>().With.Message.AtLeast("No setting value converter found for")
 			);
 		}
 
@@ -129,6 +129,7 @@ namespace TigrSettings.Tests
 		private const string ShouldBeAbleToConvertByDefault = "Should be able to convert {0} by default";
 		[Test(TestOf = typeof(SettingsBuilderBase))]
 		[TestCase(typeof(int), TestName = ShouldBeAbleToConvertByDefault)]
+		[TestCase(typeof(Guid), TestName = ShouldBeAbleToConvertByDefault)]
 		[TestCase(typeof(DateTime), TestName = ShouldBeAbleToConvertByDefault)]
 		[TestCase(typeof(TimeSpan), TestName = ShouldBeAbleToConvertByDefault)]
 		[TestCase(typeof(float[]), TestName = ShouldBeAbleToConvertByDefault)]

@@ -7,6 +7,7 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\TigrSettings.Dynamic\TigrSettings.Dynamic.csproj" />
 	  <ProjectReference Include="..\TigrSettings.Providers.ConfigurationManager\TigrSettings.Providers.ConfigurationManager.csproj" />
+	  <ProjectReference Include="..\TigrSettings.Providers.EnvironmentVariables\TigrSettings.Providers.EnvironmentVariables.csproj" />
 	  <ProjectReference Include="..\TigrSettings\TigrSettings.csproj" />
 	</ItemGroup>
 
