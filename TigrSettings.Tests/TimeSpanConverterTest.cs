@@ -12,7 +12,7 @@ namespace TigrSettings.Tests
 		private const string ShouldBeAbleToConvertTimeSpanTypeName = "Should be able to convert {0}";
 		[Test(TestOf = typeof(TimeSpanConverter))]
 		[TestCase(typeof(TimeSpan), TestName = ShouldBeAbleToConvertTimeSpanTypeName)]
-		public void ShouldBeAbleToConvertDateTypeType(Type timeSpanType)
+		public void ShouldBeAbleToConvertTimeSpanType(Type timeSpanType)
 		{
 			var canConvert = _converter.CanConvert(timeSpanType);
 
