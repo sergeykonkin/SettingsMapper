@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<Version>1.1.0</Version>
+		<Version>1.1.1</Version>
 		<TargetFrameworks>netstandard2.0;net45;net462</TargetFrameworks>
 		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 		<Authors>Sergey Konkin</Authors>
@@ -12,6 +12,10 @@
 		<PackageProjectUrl>https://github.com/sergeykonkin/TigrSettings</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/sergeykonkin/TigrSettings</RepositoryUrl>
 		<PackageTags>app.config web.config settings</PackageTags>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<DocumentationFile>bin\$(Configuration)\$(TargetFramework)\TigrSettings.xml</DocumentationFile>
 	</PropertyGroup>
 
 </Project>
