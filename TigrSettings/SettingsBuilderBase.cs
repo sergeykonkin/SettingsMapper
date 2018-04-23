@@ -11,11 +11,6 @@ namespace TigrSettings
 	/// </summary>
 	public abstract class SettingsBuilderBase
 	{
-		private readonly ISettingValueConverter[] DefaultConverters =
-		{
-
-		};
-
 		private readonly IFormatProvider _formatProvider;
 		private readonly ISettingsProvider _settingsProvider;
 		private readonly List<ISettingValueConverter> _converters;
@@ -36,7 +31,7 @@ namespace TigrSettings
 		/// Initializes a new instance of <see cref="SettingsBuilderBase"/>.
 		/// </summary>
 		/// <param name="settingsProvider">Raw string settings provider.</param>
-		/// <param name="formatProvider">Format provider for e.g. numbers and dates.</param>
+		/// <param name="formatProvider">Format provider for numbers and/or dates.</param>
 		/// <param name="converters">Set of additional converters.</param>
 		protected SettingsBuilderBase(
 			ISettingsProvider settingsProvider,
@@ -51,6 +46,7 @@ namespace TigrSettings
 			_converters.AddRange(converters);
 
 			_converters.Add(new ScalarConverter(_formatProvider));
+			_converters.Add(new GuidConverter());
 			_converters.Add(new DateTimeConverter(_formatProvider));
 			_converters.Add(new TimeSpanConverter());
 			_converters.Add(new EnumConverter());
