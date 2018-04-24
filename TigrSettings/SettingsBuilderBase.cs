@@ -13,6 +13,9 @@ namespace TigrSettings
 		private readonly ISettingsProvider _settingsProvider;
 		private readonly List<ISettingValueConverter> _converters;
 
+		/// <summary>
+		/// Gets binder for settings-to-type conversion.
+		/// </summary>
 		internal abstract IBinder Binder { get; }
 
 		/// <summary>
@@ -108,6 +111,9 @@ namespace TigrSettings
 			return target;
 		}
 
+		/// <summary>
+		/// Gets required inner type description for friendly exception message.
+		/// </summary>
 		protected virtual string TypeDesc => "simple { get; set; } POCO with parameterless constructor";
 	}
 }

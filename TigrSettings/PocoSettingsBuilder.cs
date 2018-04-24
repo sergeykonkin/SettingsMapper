@@ -36,7 +36,7 @@ namespace TigrSettings
 		}
 
 		/// <summary>
-		/// Creates new instance of <see cref="TSettings"/> with properties filled with converted settings.
+		/// Creates new instance of <typeparamref name="TSettings"/> with properties filled with converted settings.
 		/// </summary>
 		/// <returns>Poco object instance.</returns>
 		public TSettings Create()

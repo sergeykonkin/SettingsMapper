@@ -42,7 +42,7 @@ namespace TigrSettings
 		}
 
 		/// <summary>
-		/// Creates new instance of dynamic object that implements <see cref="TSettings"/> with properties filled with converted settings.
+		/// Creates new instance of dynamic object that implements <typeparamref name="TSettings"/> with properties filled with converted settings.
 		/// </summary>
 		/// <returns>Dynamic object instance.</returns>
 		public TSettings Create()
@@ -50,8 +50,6 @@ namespace TigrSettings
 			object expando = Build(typeof(TSettings)) ?? new ExpandoObject();
 			return expando.ActLike<TSettings>();
 		}
-
-		internal override IBinder Binder { get; } = new DynamicBinder();
 
 		/// <inheritdoc />
 		internal override object Build(Type targetType, string prefix = null)
@@ -67,6 +65,10 @@ namespace TigrSettings
 			return result.ActLikeProperties(props);
 		}
 
+		/// <inheritdoc />
+		internal override IBinder Binder { get; } = new DynamicBinder();
+
+		/// <inheritdoc />
 		protected override string TypeDesc => base.TypeDesc + " or interface";
 	}
 }

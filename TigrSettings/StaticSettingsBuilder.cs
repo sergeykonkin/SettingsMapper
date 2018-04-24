@@ -46,7 +46,10 @@ namespace TigrSettings
 			base.Build(staticType);
 		}
 
+		/// <inheritdoc />
 		internal override IBinder Binder { get; } = new StaticBinder();
+
+		/// <inheritdoc />
 		protected override string TypeDesc => base.TypeDesc + " or nested static class";
 	}
 }

@@ -3,8 +3,9 @@
 namespace TigrSettings.Converters
 {
 	/// <summary>
-	/// Converts raw string setting values to <see cref="TValue"/> type.
+	/// Converts raw string setting values to <typeparamref name="TValue"/> type.
 	/// </summary>
+	/// <typeparam name="TValue">Converted value type.</typeparam>
 	public abstract class SettingValueConverterBase<TValue> : ISettingValueConverter
 	{
 		/// <inheritdoc />
@@ -20,10 +21,10 @@ namespace TigrSettings.Converters
 		}
 
 		/// <summary>
-		/// Covnerts string setting value to <see cref="TValue"/> type.
+		/// Covnerts string setting value to <typeparamref name="TValue"/> type.
 		/// </summary>
 		/// <param name="value">Value to convert.</param>
-		/// <returns>Converted <see cref="TValue"/> value.</returns>
+		/// <returns>Converted value.</returns>
 		public abstract TValue Convert(string value);
 	}
 }
