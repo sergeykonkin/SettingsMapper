@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Dynamic;
+using System.Globalization;
+using System.Linq;
 using ImpromptuInterface;
 
-namespace TigrSettings.Dynamic
+namespace TigrSettings
 {
 	/// <summary>
 	/// Provides functionality to bind raw settings to Dynamic objects that implements specified interface.
@@ -18,7 +21,7 @@ namespace TigrSettings.Dynamic
 		public DynamicSettingsBuilder(
 			ISettingsProvider settingsProvider,
 			params ISettingValueConverter[] converters)
-			: base(settingsProvider, converters)
+			: this(settingsProvider, CultureInfo.InvariantCulture, converters)
 		{
 		}
 
@@ -26,7 +29,7 @@ namespace TigrSettings.Dynamic
 		/// Initializes a new instance of <see cref="DynamicSettingsBuilder{TSettings}"/>.
 		/// </summary>
 		/// <param name="settingsProvider">Raw string settings provider.</param>
-		/// <param name="formatProvider">Format provider for e.g. numbers and dates.</param>
+		/// <param name="formatProvider">Format provider for numbers and/or dates.</param>
 		/// <param name="converters">Set of additional converters.</param>
 		public DynamicSettingsBuilder(
 			ISettingsProvider settingsProvider,
@@ -34,6 +37,8 @@ namespace TigrSettings.Dynamic
 			params ISettingValueConverter[] converters)
 			: base(settingsProvider, formatProvider, converters)
 		{
+			if (!typeof(TSettings).IsInterface)
+				throw new ArgumentException($"{nameof(TSettings)} typeparam must be an interface type.", nameof(TSettings));
 		}
 
 		/// <summary>
@@ -42,9 +47,26 @@ namespace TigrSettings.Dynamic
 		/// <returns>Dynamic object instance.</returns>
 		public TSettings Create()
 		{
-			var settings = new ExpandoObject();
-			base.FillProps(new DynamicBinder(settings, typeof(TSettings)));
-			return Impromptu.ActLike<TSettings>(settings);
+			object expando = Build(typeof(TSettings)) ?? new ExpandoObject();
+			return expando.ActLike<TSettings>();
 		}
+
+		internal override IBinder Binder { get; } = new DynamicBinder();
+
+		/// <inheritdoc />
+		internal override object Build(Type targetType, string prefix = null)
+		{
+			object result = base.Build(targetType, prefix);
+			if (!(result is ExpandoObject))
+				return result;
+
+			IDictionary<string, Type> props = Binder
+				.GetProps(targetType)
+				.ToDictionary(prop => prop.Name, prop => prop.Type);
+
+			return result.ActLikeProperties(props);
+		}
+
+		protected override string TypeDesc => base.TypeDesc + " or interface";
 	}
 }

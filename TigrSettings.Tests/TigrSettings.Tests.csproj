@@ -1,20 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFrameworks>net462</TargetFrameworks>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFrameworks>net462</TargetFrameworks>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.7.0" />
-    <PackageReference Include="Moq" Version="4.8.2" />
-    <PackageReference Include="NUnit" Version="3.10.1" />
-    <PackageReference Include="NUnit3TestAdapter" Version="3.10.0" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.7.0" />
+		<PackageReference Include="Moq" Version="4.8.2" />
+		<PackageReference Include="NUnit" Version="3.10.1" />
+		<PackageReference Include="NUnit3TestAdapter" Version="3.10.0" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\TigrSettings.Dynamic\TigrSettings.Dynamic.csproj" />
-    <ProjectReference Include="..\TigrSettings.Providers.ConfigurationManager\TigrSettings.Providers.ConfigurationManager.csproj" />
-    <ProjectReference Include="..\TigrSettings\TigrSettings.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\TigrSettings\TigrSettings.csproj" />
+	</ItemGroup>
 
 </Project>

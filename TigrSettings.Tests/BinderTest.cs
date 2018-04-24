@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Dynamic;
+﻿using System;
+using System.Collections.Generic;
 using NUnit.Framework;
-using TigrSettings.Dynamic;
 
 namespace TigrSettings.Tests
 {
@@ -15,13 +14,14 @@ namespace TigrSettings.Tests
 		[TestCase("NullableDouble", null, TestName = PocoBinderTestName)]
 		public void PocoBinderTest(string propName, object value)
 		{
-			var poco = new Poco();
-			var pocoBinder = new PocoBinder(poco);
+			var pocoBinder = new PocoBinder();
+			Type targetType = typeof(Model.Poco);
+			object target = pocoBinder.CreateTarget(targetType);
 
-			pocoBinder.Bind(propName, value);
+			pocoBinder.Bind(target, targetType, propName, value);
 
-			var prop = poco.GetType().GetProperty(propName);
-			var result = prop.GetValue(poco);
+			var prop = target.GetType().GetProperty(propName);
+			var result = prop.GetValue(target);
 
 			Assert.AreEqual(value, result);
 		}
@@ -33,11 +33,13 @@ namespace TigrSettings.Tests
 		[TestCase("NullableDouble", null, TestName = StaticBinderTestName)]
 		public void StaticBinderTest(string propName, object value)
 		{
-			var staticBinder = new StaticBinder(typeof(Static));
+			var staticBinder = new StaticBinder();
+			var targetType = typeof(Model.Static);
+			var target = staticBinder.CreateTarget(targetType);
 
-			staticBinder.Bind(propName, value);
+			staticBinder.Bind(target, targetType, propName, value);
 
-			var prop = typeof(Static).GetProperty(propName);
+			var prop = typeof(Model.Static).GetProperty(propName);
 			var result = prop.GetValue(null);
 
 			Assert.AreEqual(value, result);
@@ -50,10 +52,11 @@ namespace TigrSettings.Tests
 		[TestCase("NullableDouble", null, TestName = DynamicBinderTestName)]
 		public void DynamicBinderTest(string propName, object value)
 		{
-			var target = new ExpandoObject();
-			var dynamicBinder = new DynamicBinder(target, typeof(IDynamic));
+			var dynamicBinder = new DynamicBinder();
+			Type targetType = typeof(Model.IDynamic);
+			object target = dynamicBinder.CreateTarget(targetType);
 
-			dynamicBinder.Bind(propName, value);
+			dynamicBinder.Bind(target, targetType, propName, value);
 
 			var dict = (IDictionary<string, object>) target;
 			var result = dict[propName];

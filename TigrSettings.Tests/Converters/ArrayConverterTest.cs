@@ -40,7 +40,16 @@ namespace TigrSettings.Tests
 			_elementConverter.Verify(c => c.CanConvert(elementType), Times.Once);
 		}
 
-		private const string ShouldNotBeAbleToConvertIfNoElementConverterProvidedName = "Should be able to convert if no array element type converter provided";
+		private const string ShouldNotBeAbleToConvertNonArrayTypeName = "Should not be able to convert non-arrays";
+		[Test(TestOf = typeof(ArrayConverter))]
+		[TestCase(typeof(int), TestName = ShouldNotBeAbleToConvertNonArrayTypeName)]
+		public void ShouldNotBeAbleToConvertNonArrayType(Type nonArrayType)
+		{
+			var canConvert = _converter.CanConvert(nonArrayType);
+			Assert.IsFalse(canConvert);
+		}
+
+		private const string ShouldNotBeAbleToConvertIfNoElementConverterProvidedName = "Should not be able to convert if no array element type converter provided";
 		[Test(TestOf = typeof(ArrayConverter))]
 		[TestCase(typeof(DateTime[]), TestName = ShouldNotBeAbleToConvertIfNoElementConverterProvidedName)]
 		public void ShouldNotBeAbleToConvertIfNoElementConverterProvided(Type arrayType)

@@ -2,7 +2,7 @@
 using System.ComponentModel;
 using System.Text;
 
-namespace TigrSettings.Providers.EnvironmentVariables
+namespace TigrSettings
 {
 	/// <summary>
 	/// Provides raw settings' values from environment variables.

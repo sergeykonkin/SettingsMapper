@@ -14,6 +14,15 @@ namespace TigrSettings
 		/// <returns>true - if specified type is non-nullable value type; false - otherwise.</returns>
 		public static bool IsNonNullableValueType(this Type type) =>
 			type.IsValueType
-			&& !(type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>));
+			&&
+			!(type.IsGenericType && type.GetGenericTypeDefinition() == typeof(Nullable<>));
+
+		/// <summary>
+		/// Checks if <see cref="Type"/> is static type.
+		/// </summary>
+		/// <param name="type">Type to check.</param>
+		/// <returns>true - if specified type is static type; false - otherwise.</returns>
+		public static bool IsStatic(this Type type)
+			=> type.IsAbstract && type.IsSealed;
 	}
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 namespace TigrSettings
 {
@@ -15,7 +16,7 @@ namespace TigrSettings
 		public StaticSettingsBuilder(
 			ISettingsProvider settingsProvider,
 			params ISettingValueConverter[] converters)
-			: base(settingsProvider, converters)
+			: base(settingsProvider, CultureInfo.InvariantCulture, converters)
 		{
 		}
 
@@ -39,7 +40,13 @@ namespace TigrSettings
 		/// <param name="staticType">Static class type.</param>
 		public void MapTo(Type staticType)
 		{
-			base.FillProps(new StaticBinder(staticType));
+			if (!staticType.IsStatic())
+				throw new ArgumentException("Provided type must be a static class.", nameof(staticType));
+
+			base.Build(staticType);
 		}
+
+		internal override IBinder Binder { get; } = new StaticBinder();
+		protected override string TypeDesc => base.TypeDesc + " or nested static class";
 	}
 }

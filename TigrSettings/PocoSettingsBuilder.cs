@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 namespace TigrSettings
 {
@@ -16,7 +17,7 @@ namespace TigrSettings
 		public PocoSettingsBuilder(
 			ISettingsProvider settingsProvider,
 			params ISettingValueConverter[] converters)
-			: base(settingsProvider, converters)
+			: this(settingsProvider, CultureInfo.InvariantCulture, converters)
 		{
 		}
 
@@ -40,9 +41,9 @@ namespace TigrSettings
 		/// <returns>Poco object instance.</returns>
 		public TSettings Create()
 		{
-			var instance = new TSettings();
-			base.FillProps(new PocoBinder(instance));
-			return instance;
+			return (TSettings) base.Build(typeof(TSettings)) ?? new TSettings();
 		}
+
+		internal override IBinder Binder { get; } = new PocoBinder();
 	}
 }

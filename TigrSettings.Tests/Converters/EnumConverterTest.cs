@@ -11,7 +11,7 @@ namespace TigrSettings.Tests
 
 		private const string ShouldBeAbleToConvertEnumTypeName = "Should be able to convert {0}";
 		[Test(TestOf = typeof(EnumConverter))]
-		[TestCase(typeof(TestEnum), TestName = ShouldBeAbleToConvertEnumTypeName)]
+		[TestCase(typeof(Model.Enum), TestName = ShouldBeAbleToConvertEnumTypeName)]
 		public void ShouldBeAbleToConvertEnumType(Type enumType)
 		{
 			var canConvert = _converter.CanConvert(enumType);
@@ -20,8 +20,8 @@ namespace TigrSettings.Tests
 
 		private const string ShouldConvertToExpectedValueName = "Should convert string {0} to corresponding {1} value";
 		[Test(TestOf = typeof(EnumConverter))]
-		[TestCase("Two", typeof(TestEnum), ExpectedResult = TestEnum.Two, TestName = ShouldConvertToExpectedValueName)]
-		[TestCase("One|Four", typeof(TestEnum), ExpectedResult = TestEnum.One|TestEnum.Four, TestName = ShouldConvertToExpectedValueName)]
+		[TestCase("Two", typeof(Model.Enum), ExpectedResult = Model.Enum.Two, TestName = ShouldConvertToExpectedValueName)]
+		[TestCase("One|Four", typeof(Model.Enum), ExpectedResult = Model.Enum.One|Model.Enum.Four, TestName = ShouldConvertToExpectedValueName)]
 		public object ShouldConvertToExpectedValue(string value, Type type)
 		{
 			return _converter.Convert(value, type);

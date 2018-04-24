@@ -1,4 +1,4 @@
-﻿namespace TigrSettings.Providers.ConfigurationManager
+﻿namespace TigrSettings
 {
 	/// <summary>
 	/// Provides raw settings' values using <see cref="System.Configuration.ConfigurationManager"/>.

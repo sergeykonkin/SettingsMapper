@@ -2,41 +2,88 @@
 
 namespace TigrSettings.Tests
 {
-	public class Poco
+	public class Model
 	{
-		public int Int { get; set; }
-		public string String { get; set; }
-		public double? NullableDouble { get; set; }
-	}
+		// POCO:
+		public class Poco
+		{
+			public int Int { get; set; }
+			public string String { get; set; }
+			public double? NullableDouble { get; set; }
+		}
 
-	public static class Static
-	{
-		public static int Int { get; set; }
-		public static string String { get; set; }
-		public static double? NullableDouble { get; set; }
-	}
+		public class PocoWithInner
+		{
+			public Inner Inner { get; set; }
+		}
 
-	public interface IDynamic
-	{
-		int Int { get; }
-		string String { get; }
-		double? NullableDouble { get; }
-	}
+		// Static:
+		public static class Static
+		{
+			public static int Int { get; set; }
+			public static string String { get; set; }
+			public static double? NullableDouble { get; set; }
+		}
 
-	public class PocoWithUnknownType
-	{
-		public UnknownType Unknown { get; set; }
-	}
+		public static class StaticWithInner
+		{
+			public static Inner Inner { get; set; }
+		}
 
-	public class UnknownType
-	{
-	}
+		public static class StaticWithNested
+		{
+			public static class Nested
+			{
+				public static int Int { get; set; }
+			}
+		}
 
-	[Flags]
-	public enum TestEnum
-	{
-		One = 1,
-		Two = 2,
-		Four = 4
+		// Dynamic:
+		public interface IDynamic
+		{
+			int Int { get; }
+			string String { get; }
+			double? NullableDouble { get; }
+		}
+
+		public interface IDynamicWithInner
+		{
+			Inner Inner { get; }
+		}
+
+		public interface IDynamicWithIInner
+		{
+			IInner Inner { get; }
+		}
+
+		// Service:
+
+		public class Inner
+		{
+			public int Int { get; set; }
+		}
+
+		public interface IInner
+		{
+			int Int { get; }
+		}
+
+		public class PocoWithUnknownType
+		{
+			public UnknownType Unknown { get; set; }
+		}
+
+		public class UnknownType
+		{
+			private UnknownType(string _){}
+		}
+
+		[Flags]
+		public enum Enum
+		{
+			One = 1,
+			Two = 2,
+			Four = 4
+		}
 	}
 }

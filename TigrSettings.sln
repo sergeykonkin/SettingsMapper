@@ -1,13 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2002
+VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TigrSettings", "TigrSettings\TigrSettings.csproj", "{A7B20E60-E2F8-4C2E-80D1-C7AA76269252}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TigrSettings.Providers.ConfigurationManager", "TigrSettings.Providers.ConfigurationManager\TigrSettings.Providers.ConfigurationManager.csproj", "{6A883F50-6530-4AAF-81DF-1BB4E4E11BBA}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TigrSettings.Dynamic", "TigrSettings.Dynamic\TigrSettings.Dynamic.csproj", "{CA49D27E-3D64-428D-971B-C7DBAF9A9626}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TigrSettings.Tests", "TigrSettings.Tests\TigrSettings.Tests.csproj", "{3753A52A-4376-43A4-92C5-FC0A4A27F091}"
 EndProject
@@ -21,8 +17,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Misc Items", "Misc Items", 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TigrSettings.Providers.EnvironmentVariables", "TigrSettings.Providers.EnvironmentVariables\TigrSettings.Providers.EnvironmentVariables.csproj", "{CC3A9638-4C8F-4C43-86D8-C2A0D3DD01B3}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,14 +27,6 @@ Global
 		{A7B20E60-E2F8-4C2E-80D1-C7AA76269252}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A7B20E60-E2F8-4C2E-80D1-C7AA76269252}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A7B20E60-E2F8-4C2E-80D1-C7AA76269252}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6A883F50-6530-4AAF-81DF-1BB4E4E11BBA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6A883F50-6530-4AAF-81DF-1BB4E4E11BBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6A883F50-6530-4AAF-81DF-1BB4E4E11BBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6A883F50-6530-4AAF-81DF-1BB4E4E11BBA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CA49D27E-3D64-428D-971B-C7DBAF9A9626}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CA49D27E-3D64-428D-971B-C7DBAF9A9626}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CA49D27E-3D64-428D-971B-C7DBAF9A9626}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CA49D27E-3D64-428D-971B-C7DBAF9A9626}.Release|Any CPU.Build.0 = Release|Any CPU
 		{3753A52A-4376-43A4-92C5-FC0A4A27F091}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{3753A52A-4376-43A4-92C5-FC0A4A27F091}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3753A52A-4376-43A4-92C5-FC0A4A27F091}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -49,10 +35,6 @@ Global
 		{D2293E99-C758-4801-AF21-E13FAD7BE0AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D2293E99-C758-4801-AF21-E13FAD7BE0AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D2293E99-C758-4801-AF21-E13FAD7BE0AF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CC3A9638-4C8F-4C43-86D8-C2A0D3DD01B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CC3A9638-4C8F-4C43-86D8-C2A0D3DD01B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CC3A9638-4C8F-4C43-86D8-C2A0D3DD01B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CC3A9638-4C8F-4C43-86D8-C2A0D3DD01B3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

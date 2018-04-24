@@ -4,7 +4,7 @@ Simple yet extensible .NET Standard 2.0 library for mapping settings to strong t
 
 ## Getting Started
 
-**TigrSettings** supports 3 different builders: `PocoSettingsBuilder{T}`, `StaticSettingsBuilder` and `DynamicSettingsBuilder{T}` (within separate `TigrSettings.Dynamic` package).
+**TigrSettings** supports 3 different builders: `PocoSettingsBuilder{T}`, `StaticSettingsBuilder` and `DynamicSettingsBuilder{T}`.
 
 ### POCO builder
 Lets say we have following `App.config`:
@@ -19,6 +19,7 @@ Lets say we have following `App.config`:
         <add key="DateTime" value="2018-04-21T12:34:56.789Z" />
         <add key="ArrayOfTimeSpans" value="00:00:05, 00:00:10, 00:00:15" />
         <add key="NullableBoolean" value="null" />
+        <add key="Inner.Int" value="7" /> <!-- Custom types are supported with prefixes -->
     </appSettings>
 </configuration>
 ```
@@ -34,6 +35,7 @@ public class AppSettings
     public DateTime DateTime { get; set; }
     public TimeSpan[] ArrayOfTimeSpans { get; set; }
     public bool? NullableBoolean { get; set; }
+    public Inner Inner { get; set; }
 }
 
 [Flags]
@@ -42,6 +44,11 @@ public enum EnumSetting
     Foo = 1,
     Bar = 2,
     Baz = 4
+}
+
+public class Inner
+{
+    public int Int { get; set; }
 }
 ```
 
@@ -52,8 +59,6 @@ ISettingsProvider settingsProvider = new AppSettingsProvider();
 var pocoBuilder = new PocoSettingsBuilder<AppSettings>(settingsProvider);
 AppSettings appSettings = pocoBuilder.Create();
 ```
-
-**Note.** `AppSettingsProvider` (which provides settings from `App.config` / `Web.config`) is located in separate `TigrSettings.Providers.ConfigurationManager` package.
 
 ### Static builder
 
@@ -68,6 +73,11 @@ public static class AppSettings
     public static DateTime DateTime { get; set; }
     public static TimeSpan[] ArrayOfTimeSpans { get; set; }
     public static bool? NullableBoolean { get; set; }
+    public static Inner Inner { get; set; }
+    public static class Nested  // StaticSettingsBuilder has a support for nested static classes (by prefixes, like custom type props)
+    {
+        public static int Int { get; set; }
+    }
 }
 ```
 
@@ -93,6 +103,8 @@ public interface IAppSettings
     DateTime DateTime { get; }
     TimeSpan[] ArrayOfTimeSpans { get; }
     bool? NullableBoolean { get; }
+    Inner Inner { get; }    // DynamicSettingsBuilder supports both POCO types
+    IInner Inner { get; }   // and another dynamic interfaces as inner types
 }
 ```
 
@@ -103,8 +115,6 @@ ISettingsProvider settingsProvider = new AppSettingsProvider();
 var dynamicBuilder = new DynamicSettingsBuilder<IAppSettings>(settingsProvider);
 IAppSettings appSettings = dynamicBuilder.Create();
 ```
-
-**Note.** `DynamicSettingsBuilder{T}` located in separate `TigrSettings.Dynamic` package.
 
 
 ### Converters
@@ -121,32 +131,17 @@ Custom converter of some type has higher priority than default one, so if some d
 
 
 ## Installing
-Core library:
+
+Since version 2.0.0 all packages were merget into single:
+
 ```
 Install-Package TigrSettings
-```
-
-Dynamic support:
-
-```
-Install-Package TigrSettings.Dynamic
-```
-
-`ConfigurationManager` provider:
-
-```
-Install-Package TigrSettings.Providers.ConfigurationManager
-```
-
-Environment variables provider:
-```
-Install-Package TigrSettings.Providers.EnvironmentVariables
 ```
 
 
 ## Built With
 
-* [ImpromptuInterface](https://github.com/ekonbenefits/impromptu-interface) - for `TigrSettings.Dynamic` implementation
+* [ImpromptuInterface](https://github.com/ekonbenefits/impromptu-interface) - for `DynamicSettingsBuilder` implementation
 
 
 ## License

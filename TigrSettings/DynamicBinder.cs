@@ -1,34 +1,34 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Reflection;
 
 namespace TigrSettings
 {
 	/// <summary>
-	/// Binder for Static classes.
+	/// Binder for Dynamic objects.
 	/// </summary>
-	internal class StaticBinder : IBinder
+	internal class DynamicBinder : IBinder
 	{
 		/// <inheritdoc />
 		public object CreateTarget(Type targetType) =>
-			targetType.IsStatic()
-				? null
+			targetType.IsInterface
+				? new ExpandoObject()
 				: Activator.CreateInstance(targetType);
 
 		/// <inheritdoc />
 		public IEnumerable<BindingProp> GetProps(Type targetType) =>
-			targetType
-				.GetProperties(BindingFlags.Public | BindingFlags.Static | BindingFlags.Instance)
-				.Select(BindingProp.FromProperty)
-				.Union(
-					targetType
-						.GetNestedTypes()
-						.Where(TypeHelper.IsStatic)
-						.Select(BindingProp.FromType));
+			targetType.GetProperties(BindingFlags.Public | BindingFlags.Instance)
+				.Select(BindingProp.FromProperty);
 
 		/// <inheritdoc />
 		public void Bind(object target, Type targetType, string name, object value)
-			=> targetType.GetProperty(name)?.SetValue(target, value, null);
+		{
+			if (target is ExpandoObject)
+				((IDictionary<string, object>) target).Add(name, value);
+			else
+				targetType.GetProperty(name).SetValue(target, value, null);
+		}
 	}
 }
