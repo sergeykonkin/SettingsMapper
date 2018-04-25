@@ -41,6 +41,7 @@ namespace TigrSettings
 			_converters.Add(new DateTimeConverter(formatProvider));
 			_converters.Add(new TimeSpanConverter());
 			_converters.Add(new EnumConverter());
+			_converters.Add(new ByteArrayConverter());
 			_converters.Add(new NullableConverter(_converters.ToArray()));
 			_converters.Add(new ArrayConverter(_converters.ToArray()));
 		}

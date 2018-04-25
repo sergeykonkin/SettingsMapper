@@ -31,6 +31,7 @@ namespace TigrSettings.Tests
 		[TestCase(typeof(TimeSpan), TestName = ShouldBeAbleToConvertByDefault)]
 		[TestCase(typeof(float[]), TestName = ShouldBeAbleToConvertByDefault)]
 		[TestCase(typeof(Model.Enum), TestName = ShouldBeAbleToConvertByDefault)]
+		[TestCase(typeof(byte[]), TestName = ShouldBeAbleToConvertByDefault)]
 		[TestCase(typeof(char?), TestName = ShouldBeAbleToConvertByDefault)]
 		[TestCase(typeof(double?[]), TestName = ShouldBeAbleToConvertByDefault)]
 		public void SettingsBuilderShouldBeAbleToConvertSomeTypesByDefault(Type type)
