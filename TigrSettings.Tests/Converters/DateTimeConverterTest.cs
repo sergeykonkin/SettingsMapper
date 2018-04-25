@@ -23,8 +23,6 @@ namespace TigrSettings.Tests
 		[Test(TestOf = typeof(DateTimeConverter))]
 		[TestCase("2018-04-21T12:34:56.789Z", typeof(DateTime), TestName = ShouldConvertToExpectedValueName)]
 		[TestCase("Sat, 21 Apr 2018 15:34:56.789 +0300", typeof(DateTime), TestName = ShouldConvertToExpectedValueName)]
-		[TestCase("21/04/2018 19:34:56.789 +0700", typeof(DateTime), TestName = ShouldConvertToExpectedValueName)]
-		[TestCase("21.04.2018 21:34:56.789 +0900", typeof(DateTime), TestName = ShouldConvertToExpectedValueName)]
 		public void ShouldConvertToExpectedValue(string value, Type type)
 		{
 			var result = _converter.Convert(value, type);

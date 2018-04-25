@@ -14,7 +14,7 @@ namespace TigrSettings.Converters
 		/// Initializes a new instance of <see cref="DateTimeConverter"/>.
 		/// </summary>
 		public DateTimeConverter()
-			: this(CultureInfo.CurrentCulture.DateTimeFormat)
+			: this(CultureInfo.InvariantCulture)
 		{
 		}
 

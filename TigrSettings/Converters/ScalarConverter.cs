@@ -23,7 +23,7 @@ namespace TigrSettings.Converters
 		/// Initializes a new instance of <see cref="ScalarConverter"/>.
 		/// </summary>
 		public ScalarConverter()
-			: this(CultureInfo.InvariantCulture.NumberFormat)
+			: this(CultureInfo.InvariantCulture)
 		{
 		}
 
