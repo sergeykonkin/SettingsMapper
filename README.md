@@ -6,7 +6,8 @@ Simple yet extensible .NET Standard 2.0 library for mapping settings to strong t
 
 ## Getting Started
 
-**TigrSettings** supports 3 different builders: `PocoSettingsBuilder{T}`, `StaticSettingsBuilder` and `DynamicSettingsBuilder{T}`.
+**TigrSettings** supports 3 different builders: `PocoSettingsBuilder{T}`, `StaticSettingsBuilder` and `DynamicSettingsBuilder{T}`
+and 2 providers: `AppSettingsProvider` and `EnvironmentVariablesProvider`.
 
 ### POCO builder
 Lets say we have following `App.config`:
