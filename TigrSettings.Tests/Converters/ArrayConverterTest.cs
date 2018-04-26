@@ -8,13 +8,13 @@ namespace TigrSettings.Tests
 	[TestFixture]
 	public class ArrayConverterTest
 	{
-		private static Mock<ISettingValueConverter> _elementConverter;
-		private ISettingValueConverter _converter;
+		private static Mock<ISettingConverter> _elementConverter;
+		private ISettingConverter _converter;
 
 		[SetUp]
 		public void Setup()
 		{
-			_elementConverter = new Mock<ISettingValueConverter>();
+			_elementConverter = new Mock<ISettingConverter>();
 			_elementConverter.Setup(c => c.CanConvert(typeof(int))).Returns(true);
 			_elementConverter.Setup(c => c.CanConvert(typeof(TimeSpan))).Returns(true);
 			_elementConverter.Setup(c => c.Convert("3", typeof(int))).Returns(3);

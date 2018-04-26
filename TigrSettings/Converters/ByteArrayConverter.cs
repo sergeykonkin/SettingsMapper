@@ -7,7 +7,7 @@ namespace TigrSettings.Converters
 	/// <summary>
 	/// Converts Base64 encoded raw string setting values to Byte Array type.
 	/// </summary>
-	public class ByteArrayConverter : SettingValueConverterBase<byte[]>
+	public class ByteArrayConverter : SettingConverterBase<byte[]>
 	{
 		/// <inheritdoc />
 		public override byte[] Convert(string value)

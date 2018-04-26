@@ -6,7 +6,7 @@ namespace TigrSettings.Converters
 	/// <summary>
 	/// Converts raw string setting values to specified <see cref="Enum"/> type.
 	/// </summary>
-	public class EnumConverter : ISettingValueConverter
+	public class EnumConverter : ISettingConverter
 	{
 		/// <inheritdoc />
 		public virtual bool CanConvert(Type type)

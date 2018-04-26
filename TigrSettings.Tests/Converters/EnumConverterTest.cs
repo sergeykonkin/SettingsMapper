@@ -7,7 +7,7 @@ namespace TigrSettings.Tests
 	[TestFixture]
 	public class EnumConverterTest
 	{
-		private readonly ISettingValueConverter _converter = new EnumConverter();
+		private readonly ISettingConverter _converter = new EnumConverter();
 
 		private const string ShouldBeAbleToConvertEnumTypeName = "Should be able to convert {0}";
 		[Test(TestOf = typeof(EnumConverter))]

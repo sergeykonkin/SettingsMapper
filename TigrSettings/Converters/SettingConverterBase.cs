@@ -6,7 +6,7 @@ namespace TigrSettings.Converters
 	/// Converts raw string setting values to <typeparamref name="TValue"/> type.
 	/// </summary>
 	/// <typeparam name="TValue">Converted value type.</typeparam>
-	public abstract class SettingValueConverterBase<TValue> : ISettingValueConverter
+	public abstract class SettingConverterBase<TValue> : ISettingConverter
 	{
 		/// <inheritdoc />
 		public bool CanConvert(Type type)

@@ -7,7 +7,7 @@ namespace TigrSettings.Converters
 	/// <summary>
 	/// Converts raw string setting values to scalar primitive types.
 	/// </summary>
-	public class ScalarConverter : ISettingValueConverter
+	public class ScalarConverter : ISettingConverter
 	{
 		private static readonly Type[] Exclude =
 		{

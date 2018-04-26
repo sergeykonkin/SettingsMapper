@@ -15,7 +15,7 @@ namespace TigrSettings
 		/// <param name="converters">Set of additional converters.</param>
 		public StaticSettingsBuilder(
 			ISettingsProvider settingsProvider,
-			params ISettingValueConverter[] converters)
+			params ISettingConverter[] converters)
 			: base(settingsProvider, CultureInfo.InvariantCulture, converters)
 		{
 		}
@@ -29,7 +29,7 @@ namespace TigrSettings
 		public StaticSettingsBuilder(
 			ISettingsProvider settingsProvider,
 			IFormatProvider formatProvider,
-			params ISettingValueConverter[] converters)
+			params ISettingConverter[] converters)
 			: base(settingsProvider, formatProvider, converters)
 		{
 		}

@@ -8,13 +8,13 @@ namespace TigrSettings.Tests
 	[TestFixture]
 	public class NullableConverterTest
 	{
-		private static Mock<ISettingValueConverter> _underlyingConverter;
-		private ISettingValueConverter _converter;
+		private static Mock<ISettingConverter> _underlyingConverter;
+		private ISettingConverter _converter;
 
 		[SetUp]
 		public void Setup()
 		{
-			_underlyingConverter = new Mock<ISettingValueConverter>();
+			_underlyingConverter = new Mock<ISettingConverter>();
 			_underlyingConverter.Setup(c => c.CanConvert(typeof(int))).Returns(true);
 			_underlyingConverter.Setup(c => c.CanConvert(typeof(double))).Returns(true);
 			_underlyingConverter.Setup(c => c.CanConvert(typeof(TimeSpan))).Returns(true);

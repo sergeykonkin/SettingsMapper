@@ -7,7 +7,7 @@ namespace TigrSettings.Tests
 	[TestFixture]
 	public class ScalarConverterTest
 	{
-		private readonly ISettingValueConverter _converter = new ScalarConverter();
+		private readonly ISettingConverter _converter = new ScalarConverter();
 
 		private const string ShouldBeAbleToConvertAllPrimitiveTypesName = "Should be able to convert {0}";
 		[Test(TestOf = typeof(ScalarConverter))]

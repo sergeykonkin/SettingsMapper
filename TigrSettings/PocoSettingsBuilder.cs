@@ -16,7 +16,7 @@ namespace TigrSettings
 		/// <param name="converters">Set of additional converters.</param>
 		public PocoSettingsBuilder(
 			ISettingsProvider settingsProvider,
-			params ISettingValueConverter[] converters)
+			params ISettingConverter[] converters)
 			: this(settingsProvider, CultureInfo.InvariantCulture, converters)
 		{
 		}
@@ -30,7 +30,7 @@ namespace TigrSettings
 		public PocoSettingsBuilder(
 			ISettingsProvider settingsProvider,
 			IFormatProvider formatProvider,
-			params ISettingValueConverter[] converters)
+			params ISettingConverter[] converters)
 			: base(settingsProvider, formatProvider, converters)
 		{
 		}

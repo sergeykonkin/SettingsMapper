@@ -11,7 +11,7 @@ namespace TigrSettings
 	public abstract class SettingsBuilderBase
 	{
 		private readonly ISettingsProvider _settingsProvider;
-		private readonly List<ISettingValueConverter> _converters;
+		private readonly List<ISettingConverter> _converters;
 
 		/// <summary>
 		/// Gets binder for settings-to-type conversion.
@@ -27,13 +27,13 @@ namespace TigrSettings
 		internal SettingsBuilderBase(
 			ISettingsProvider settingsProvider,
 			IFormatProvider formatProvider,
-			params ISettingValueConverter[] converters)
+			params ISettingConverter[] converters)
 		{
 			_settingsProvider = settingsProvider ?? throw new ArgumentNullException(nameof(settingsProvider));
 			if (formatProvider == null) throw new ArgumentNullException(nameof(formatProvider));
 			if (converters == null) throw new ArgumentNullException(nameof(converters));
 
-			_converters = new List<ISettingValueConverter>();
+			_converters = new List<ISettingConverter>();
 			_converters.AddRange(converters);
 
 			_converters.Add(new ScalarConverter(formatProvider));
@@ -104,7 +104,7 @@ namespace TigrSettings
 					continue;
 				}
 
-				ISettingValueConverter converter = _converters.First(c => c.CanConvert(type));
+				ISettingConverter converter = _converters.First(c => c.CanConvert(type));
 				object convertedValue = converter.Convert(stringValue, type);
 				Binder.Bind(target, targetType, name, convertedValue);
 			}

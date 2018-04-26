@@ -5,7 +5,7 @@ namespace TigrSettings
 	/// <summary>
 	/// Converts raw string setting values to specified type.
 	/// </summary>
-	public interface ISettingValueConverter
+	public interface ISettingConverter
 	{
 		/// <summary>
 		/// Identifies whether this converter can convert string to specified type.

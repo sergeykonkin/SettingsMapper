@@ -7,7 +7,7 @@ namespace TigrSettings.Tests
 	[TestFixture]
 	public class TimeSpanConverterTest
 	{
-		private readonly ISettingValueConverter _converter = new TimeSpanConverter();
+		private readonly ISettingConverter _converter = new TimeSpanConverter();
 
 		private const string ShouldBeAbleToConvertTimeSpanTypeName = "Should be able to convert {0}";
 		[Test(TestOf = typeof(TimeSpanConverter))]

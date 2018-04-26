@@ -7,7 +7,7 @@ namespace TigrSettings.Tests
 	[TestFixture]
 	public class GuidConverterTest
 	{
-		private readonly ISettingValueConverter _converter = new GuidConverter();
+		private readonly ISettingConverter _converter = new GuidConverter();
 
 		private const string ShouldBeAbleToConvertGuidTypeName = "Should be able to convert {0}";
 		[Test(TestOf = typeof(GuidConverter))]

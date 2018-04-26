@@ -7,7 +7,7 @@ namespace TigrSettings.Tests
 	[TestFixture]
 	public class DateTimeConverterTest
 	{
-		private readonly ISettingValueConverter _converter = new DateTimeConverter();
+		private readonly ISettingConverter _converter = new DateTimeConverter();
 
 		private const string ShouldBeAbleToConvertDateTimeTypeName = "Should be able to convert {0}";
 		[Test(TestOf = typeof(DateTimeConverter))]

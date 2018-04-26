@@ -6,7 +6,7 @@ namespace TigrSettings.Converters
 	/// <summary>
 	/// Converts raw string setting values to <see cref="TimeSpan"/> type.
 	/// </summary>
-	public class TimeSpanConverter : SettingValueConverterBase<TimeSpan>
+	public class TimeSpanConverter : SettingConverterBase<TimeSpan>
 	{
 		private readonly IFormatProvider _formatProvider;
 

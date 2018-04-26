@@ -6,7 +6,7 @@ namespace TigrSettings.Converters
 	/// <summary>
 	/// Converts raw string setting values to <see cref="DateTime"/> type.
 	/// </summary>
-	public class DateTimeConverter : SettingValueConverterBase<DateTime>
+	public class DateTimeConverter : SettingConverterBase<DateTime>
 	{
 		private readonly IFormatProvider _formatProvider;
 

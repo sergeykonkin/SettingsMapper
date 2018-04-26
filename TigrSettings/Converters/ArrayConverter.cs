@@ -8,15 +8,15 @@ namespace TigrSettings.Converters
 	/// <summary>
 	/// Converts raw string setting values to specified Array type.
 	/// </summary>
-	public class ArrayConverter : ISettingValueConverter
+	public class ArrayConverter : ISettingConverter
 	{
-		private readonly IEnumerable<ISettingValueConverter> _singleValueConverters;
+		private readonly IEnumerable<ISettingConverter> _singleValueConverters;
 
 		/// <summary>
 		/// Initializes new instance of <see cref="ArrayConverter"/>.
 		/// </summary>
 		/// <param name="singleValueConverters">Set of converters for array elements.</param>
-		public ArrayConverter(IEnumerable<ISettingValueConverter> singleValueConverters)
+		public ArrayConverter(IEnumerable<ISettingConverter> singleValueConverters)
 		{
 			_singleValueConverters = singleValueConverters;
 		}

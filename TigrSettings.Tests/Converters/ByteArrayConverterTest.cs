@@ -7,7 +7,7 @@ namespace TigrSettings.Tests
 	[TestFixture]
 	public class ByteArrayConverterTest
 	{
-		private readonly ISettingValueConverter _converter = new ByteArrayConverter();
+		private readonly ISettingConverter _converter = new ByteArrayConverter();
 
 		private const string ShouldBeAbleToConvertByteArrayTypeName = "Should be able to convert {0}";
 		[Test(TestOf = typeof(DateTimeConverter))]

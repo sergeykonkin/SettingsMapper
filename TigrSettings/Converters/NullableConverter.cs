@@ -7,15 +7,15 @@ namespace TigrSettings.Converters
 	/// <summary>
 	/// Converts raw string setting values to <see cref="Nullable{T}"/> type.
 	/// </summary>
-	public class NullableConverter : ISettingValueConverter
+	public class NullableConverter : ISettingConverter
 	{
-		private readonly IEnumerable<ISettingValueConverter> _underlyingTypeConverters;
+		private readonly IEnumerable<ISettingConverter> _underlyingTypeConverters;
 
 		/// <summary>
 		/// Initializes new instance of <see cref="NullableConverter"/>.
 		/// </summary>
 		/// <param name="underlyingTypeConverters">Set of converters for underlying type.</param>
-		public NullableConverter(IEnumerable<ISettingValueConverter> underlyingTypeConverters)
+		public NullableConverter(IEnumerable<ISettingConverter> underlyingTypeConverters)
 		{
 			_underlyingTypeConverters = underlyingTypeConverters;
 		}
