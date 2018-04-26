@@ -107,7 +107,7 @@ public interface IAppSettings
     TimeSpan[] ArrayOfTimeSpans { get; }
     bool? NullableBoolean { get; }
     Inner Inner { get; }    // DynamicSettingsBuilder supports both POCO types
-    IInner Inner { get; }   // and another dynamic interfaces as inner types
+    IInner IInner { get; }   // and another dynamic interfaces as inner types
 }
 ```
 
