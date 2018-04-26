@@ -121,7 +121,7 @@ IAppSettings appSettings = dynamicBuilder.Create();
 
 
 ### Converters
-**TigrSettings** comes with set of default converters,  but if they are not enough, you can implement either `ISettingConverter` interface or `SettingConverterBase{TValue}` class and pass additional converters to settings builder constructor:
+**TigrSettings** comes with set of default converters,  but if they are not enough, you can implement either `ISettingConverter` interface or derive from `SettingConverterBase{TValue}` class and pass additional converters to settings builder constructor:
 
 ```csharp
 ISettingsProvider myConverter = new MySettingValueConverter();
