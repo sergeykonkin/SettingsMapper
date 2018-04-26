@@ -1,3 +1,5 @@
+![Build Status](https://sergeykonkin.visualstudio.com/_apis/public/build/definitions/17550527-59cc-4f80-9136-8ea6d2181040/13/badge)
+
 # TigrSettings
 
 Simple yet extensible .NET Standard 2.0 library for mapping settings to strong types.
