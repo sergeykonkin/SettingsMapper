@@ -1,4 +1,5 @@
-![Build Status](https://sergeykonkin.visualstudio.com/_apis/public/build/definitions/17550527-59cc-4f80-9136-8ea6d2181040/13/badge)
+![Build Status](https://img.shields.io/vso/build/sergeykonkin/17550527-59cc-4f80-9136-8ea6d2181040/13.svg)
+![NuGet](https://img.shields.io/nuget/v/TigrSettings.svg)
 
 # TigrSettings
 
