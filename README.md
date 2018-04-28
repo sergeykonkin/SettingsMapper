@@ -1,4 +1,5 @@
-![Build Status](https://sergeykonkin.visualstudio.com/_apis/public/build/definitions/17550527-59cc-4f80-9136-8ea6d2181040/13/badge)
+[![Build Status](https://img.shields.io/vso/build/sergeykonkin/17550527-59cc-4f80-9136-8ea6d2181040/13.svg)](#)
+[![NuGet](https://img.shields.io/nuget/v/TigrSettings.svg)](https://www.nuget.org/packages/TigrSettings)
 
 # TigrSettings
 
@@ -6,7 +7,8 @@ Simple yet extensible .NET Standard 2.0 library for mapping settings to strong t
 
 ## Getting Started
 
-**TigrSettings** supports 3 different builders: `PocoSettingsBuilder{T}`, `StaticSettingsBuilder` and `DynamicSettingsBuilder{T}`.
+**TigrSettings** supports 3 different builders: `PocoSettingsBuilder{T}`, `StaticSettingsBuilder` and `DynamicSettingsBuilder{T}`
+and 2 providers: `AppSettingsProvider` and `EnvironmentVariablesProvider`.
 
 ### POCO builder
 Lets say we have following `App.config`:
@@ -106,7 +108,7 @@ public interface IAppSettings
     TimeSpan[] ArrayOfTimeSpans { get; }
     bool? NullableBoolean { get; }
     Inner Inner { get; }    // DynamicSettingsBuilder supports both POCO types
-    IInner Inner { get; }   // and another dynamic interfaces as inner types
+    IInner IInner { get; }   // and another dynamic interfaces as inner types
 }
 ```
 
@@ -120,7 +122,7 @@ IAppSettings appSettings = dynamicBuilder.Create();
 
 
 ### Converters
-**TigrSettings** comes with set of default converters,  but if they are not enough, you can implement either `ISettingConverter` interface or `SettingConverterBase{TValue}` class and pass additional converters to settings builder constructor:
+**TigrSettings** comes with set of default converters,  but if they are not enough, you can implement either `ISettingConverter` interface or derive from `SettingConverterBase{TValue}` class and pass additional converters to settings builder constructor:
 
 ```csharp
 ISettingsProvider myConverter = new MySettingValueConverter();
