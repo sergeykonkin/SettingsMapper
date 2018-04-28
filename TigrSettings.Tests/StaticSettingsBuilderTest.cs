@@ -30,12 +30,15 @@ namespace TigrSettings.Tests
 			var settingsProvider = new Mock<ISettingsProvider>();
 			var staticSettingsBuilder = new StaticSettingsBuilder(settingsProvider.Object);
 			settingsProvider.Setup(sp => sp.Get("Inner.Int")).Returns("5");
+			settingsProvider.Setup(sp => sp.Get("foo.Int")).Returns("10");
 
 			staticSettingsBuilder.MapTo(typeof(Model.StaticWithInner));
 
 			Assert.NotNull(Model.StaticWithInner.Inner);
+			Assert.NotNull(Model.StaticWithInner.InnerPrefixed);
 			Assert.AreEqual(5, Model.StaticWithInner.Inner.Int);
-			settingsProvider.Verify(sp => sp.Get(It.IsAny<string>()), Times.Exactly(1));
+			Assert.AreEqual(10, Model.StaticWithInner.InnerPrefixed.Int);
+			settingsProvider.Verify(sp => sp.Get(It.IsAny<string>()), Times.Exactly(2));
 		}
 
 		[Test(TestOf = typeof(StaticSettingsBuilder))]
@@ -44,12 +47,15 @@ namespace TigrSettings.Tests
 		{
 			var settingsProvider = new Mock<ISettingsProvider>();
 			settingsProvider.Setup(sp => sp.Get("Nested.Int")).Returns("5");
+			settingsProvider.Setup(sp => sp.Get("foo.Int")).Returns("10");
+
 			var staticSettingsBuilder = new StaticSettingsBuilder(settingsProvider.Object);
 
 			staticSettingsBuilder.MapTo(typeof(Model.StaticWithNested));
 
 			Assert.AreEqual(5, Model.StaticWithNested.Nested.Int);
-			settingsProvider.Verify(sp => sp.Get(It.IsAny<string>()), Times.Exactly(1));
+			Assert.AreEqual(10, Model.StaticWithNested.NestedPrefixed.Int);
+			settingsProvider.Verify(sp => sp.Get(It.IsAny<string>()), Times.Exactly(2));
 		}
 
 		[Test(TestOf = typeof(StaticSettingsBuilder))]

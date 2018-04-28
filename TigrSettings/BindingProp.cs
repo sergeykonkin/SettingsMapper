@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Reflection;
 
 namespace TigrSettings
 {
@@ -10,16 +11,22 @@ namespace TigrSettings
 
 		public Type Type { get; }
 
-		private BindingProp(string name, Type type)
+		public string CustomPrefix { get; }
+
+		private BindingProp(string name, Type type, string prefix)
 		{
 			Name = name;
 			Type = type;
+			CustomPrefix = prefix;
 		}
 
 		public static BindingProp FromType(Type type) =>
-			new BindingProp(type.Name, type);
+			new BindingProp(type.Name, type, GetPrefixAttributeValue(type));
 
-		public static BindingProp FromProperty(System.Reflection.PropertyInfo sysProp) =>
-			new BindingProp(sysProp.Name, sysProp.PropertyType);
+		public static BindingProp FromProperty(PropertyInfo prop) =>
+			new BindingProp(prop.Name, prop.PropertyType, GetPrefixAttributeValue(prop));
+
+		private static string GetPrefixAttributeValue(MemberInfo memberInfo) =>
+			memberInfo.GetSingleCustomAttribute<SettingPrefixAttribute>()?.Value;
 	}
 }

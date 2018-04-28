@@ -32,13 +32,16 @@ namespace TigrSettings.Tests
 			var settingsProvider = new Mock<ISettingsProvider>();
 			var dynamicSettingsBuilder = new DynamicSettingsBuilder<Model.IDynamicWithInner>(settingsProvider.Object);
 			settingsProvider.Setup(sp => sp.Get("Inner.Int")).Returns("5");
+			settingsProvider.Setup(sp => sp.Get("foo.Int")).Returns("10");
 
 			var result = dynamicSettingsBuilder.Create();
 
 			Assert.NotNull(result.Inner);
+			Assert.NotNull(result.InnerPrefixed);
 			Assert.AreEqual(5, result.Inner.Int);
+			Assert.AreEqual(10, result.InnerPrefixed.Int);
 
-			settingsProvider.Verify(sp => sp.Get(It.IsAny<string>()), Times.Exactly(1));
+			settingsProvider.Verify(sp => sp.Get(It.IsAny<string>()), Times.Exactly(2));
 		}
 
 		[Test(TestOf = typeof(DynamicSettingsBuilder<Model.IDynamic>))]
@@ -48,14 +51,18 @@ namespace TigrSettings.Tests
 			var settingsProvider = new Mock<ISettingsProvider>();
 			var dynamicSettingsBuilder = new DynamicSettingsBuilder<Model.IDynamicWithIInner>(settingsProvider.Object);
 			settingsProvider.Setup(sp => sp.Get("Inner.Int")).Returns("5");
+			settingsProvider.Setup(sp => sp.Get("foo.Int")).Returns("10");
 
 			var result = dynamicSettingsBuilder.Create();
 
 			Assert.NotNull(result.Inner);
+			Assert.NotNull(result.InnerPrefixed);
 			Assert.IsInstanceOf<Model.IInner>(result.Inner);
+			Assert.IsInstanceOf<Model.IInner>(result.InnerPrefixed);
 			Assert.AreEqual(5, result.Inner.Int);
+			Assert.AreEqual(10, result.InnerPrefixed.Int);
 
-			settingsProvider.Verify(sp => sp.Get(It.IsAny<string>()), Times.Exactly(1));
+			settingsProvider.Verify(sp => sp.Get(It.IsAny<string>()), Times.Exactly(2));
 		}
 	}
 }

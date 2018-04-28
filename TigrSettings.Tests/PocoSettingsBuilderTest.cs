@@ -32,12 +32,15 @@ namespace TigrSettings.Tests
 			var settingsProvider = new Mock<ISettingsProvider>();
 			var pocoSettingsBuilder = new PocoSettingsBuilder<Model.PocoWithInner>(settingsProvider.Object);
 			settingsProvider.Setup(sp => sp.Get("Inner.Int")).Returns("5");
+			settingsProvider.Setup(sp => sp.Get("foo.Int")).Returns("10");
 
 			var result = pocoSettingsBuilder.Create();
 
 			Assert.NotNull(result.Inner);
+			Assert.NotNull(result.InnerPrefixed);
 			Assert.AreEqual(5, result.Inner.Int);
-			settingsProvider.Verify(sp => sp.Get(It.IsAny<string>()), Times.Exactly(1));
+			Assert.AreEqual(10, result.InnerPrefixed.Int);
+			settingsProvider.Verify(sp => sp.Get(It.IsAny<string>()), Times.Exactly(2));
 		}
 
 		[Test(TestOf = typeof(DynamicSettingsBuilder<Model.Poco>))]

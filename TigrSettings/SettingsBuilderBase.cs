@@ -75,7 +75,7 @@ namespace TigrSettings
 				{
 					try
 					{
-						string newPrefix = (prefix ?? "") + name + ".";
+						string newPrefix = (prefix ?? "") + (prop.CustomPrefix ?? name)+ ".";
 						object inner = Build(type, newPrefix);
 						Binder.Bind(target, targetType, name, inner);
 						continue;

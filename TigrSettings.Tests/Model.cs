@@ -15,6 +15,9 @@ namespace TigrSettings.Tests
 		public class PocoWithInner
 		{
 			public Inner Inner { get; set; }
+
+			[SettingPrefix("foo")]
+			public Inner InnerPrefixed { get; set; }
 		}
 
 		// Static:
@@ -28,11 +31,20 @@ namespace TigrSettings.Tests
 		public static class StaticWithInner
 		{
 			public static Inner Inner { get; set; }
+
+			[SettingPrefix("foo")]
+			public static Inner InnerPrefixed { get; set; }
 		}
 
 		public static class StaticWithNested
 		{
 			public static class Nested
+			{
+				public static int Int { get; set; }
+			}
+
+			[SettingPrefix("foo")]
+			public static class NestedPrefixed
 			{
 				public static int Int { get; set; }
 			}
@@ -49,11 +61,17 @@ namespace TigrSettings.Tests
 		public interface IDynamicWithInner
 		{
 			Inner Inner { get; }
+
+			[SettingPrefix("foo")]
+			Inner InnerPrefixed { get;}
 		}
 
 		public interface IDynamicWithIInner
 		{
 			IInner Inner { get; }
+
+			[SettingPrefix("foo")]
+			IInner InnerPrefixed { get; }
 		}
 
 		// Service:
