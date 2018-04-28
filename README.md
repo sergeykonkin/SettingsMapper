@@ -40,7 +40,7 @@ public class AppSettings
     public DateTime DateTime { get; set; }
     public TimeSpan[] ArrayOfTimeSpans { get; set; }
     public bool? NullableBoolean { get; set; }
-    public Inner Inner { get; set; }
+    public Inner Inner { get; set; } // Custom prefix can be specified with [SettingPrefix("foo")] attribute
 }
 
 [Flags]
