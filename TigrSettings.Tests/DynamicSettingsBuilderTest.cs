@@ -64,5 +64,17 @@ namespace TigrSettings.Tests
 
 			settingsProvider.Verify(sp => sp.Get(It.IsAny<string>()), Times.Exactly(2));
 		}
+
+		[Test(TestOf = typeof(DynamicSettingsBuilder<Model.Poco>))]
+		[TestCase(TestName = "Should throw if non-interface type passed")]
+		public void DynamicSettingsBuilderShouldThrowIfNonPocoTypePassed()
+		{
+			var settingsProvider = new Mock<ISettingsProvider>();
+
+			Assert.That(
+				() => new DynamicSettingsBuilder<Model.Poco>(settingsProvider.Object),
+				Throws.ArgumentException.With.Message.AtLeast("TSettings typeparam must be an interface type.")
+			);
+		}
 	}
 }
