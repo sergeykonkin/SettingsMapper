@@ -137,7 +137,7 @@ Custom converter of some type has higher priority than default one, so if some d
 
 ## Installing
 
-Since version 2.0.0 all packages were merget into single:
+Since version 2.0.0 all packages were merged into single:
 
 ```
 Install-Package TigrSettings
