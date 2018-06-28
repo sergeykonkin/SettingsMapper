@@ -1,33 +1,33 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
-		<Version>3.2.0</Version>
-		<TargetFrameworks>net40;netstandard2.0</TargetFrameworks>
-		<Authors>Sergey Konkin</Authors>
-		<Product>TigrSettings</Product>
-		<Description>Simple yet extensible library for mapping settings to strong types. Check GitHub project page for full documentation.</Description>
-		<Copyright>Copyright (c) 2018 Sergey Konkin</Copyright>
-		<PackageLicenseUrl>https://raw.githubusercontent.com/sergeykonkin/TigrSettings/master/LICENSE</PackageLicenseUrl>
-		<PackageProjectUrl>https://github.com/sergeykonkin/TigrSettings</PackageProjectUrl>
-		<RepositoryUrl>https://github.com/sergeykonkin/TigrSettings</RepositoryUrl>
-		<PackageTags>app.config web.config settings</PackageTags>
-	</PropertyGroup>
+  <PropertyGroup>
+    <Version>3.2.0</Version>
+    <TargetFrameworks>net40;netstandard2.0</TargetFrameworks>
+    <Authors>Sergey Konkin</Authors>
+    <Product>TigrSettings</Product>
+    <Description>Simple yet extensible library for mapping settings to strong types. Check GitHub project page for full documentation.</Description>
+    <Copyright>Copyright (c) 2018 Sergey Konkin</Copyright>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/sergeykonkin/TigrSettings/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/sergeykonkin/TigrSettings</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/sergeykonkin/TigrSettings</RepositoryUrl>
+    <PackageTags>app.config web.config settings</PackageTags>
+  </PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)'=='Release'">
-		<DocumentationFile>bin\$(Configuration)\$(TargetFramework)\TigrSettings.xml</DocumentationFile>
-		<GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-	</PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <DocumentationFile>bin\$(Configuration)\$(TargetFramework)\TigrSettings.xml</DocumentationFile>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
 
-	<ItemGroup Condition="'$(TargetFramework)'=='net40'">
-		<Reference Include="System.Configuration" />
-	</ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)'=='net40'">
+    <Reference Include="System.Configuration" />
+  </ItemGroup>
 
-	<ItemGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
-		<PackageReference Include="System.Configuration.ConfigurationManager" Version="4.4.1" />
-	</ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.4.1" />
+  </ItemGroup>
 
-	<ItemGroup>
-		<PackageReference Include="ImpromptuInterface" Version="7.0.1" />
-	</ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="ImpromptuInterface" Version="7.0.1" />
+  </ItemGroup>
 
 </Project>
