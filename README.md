@@ -1,11 +1,7 @@
 ﻿[![Build status](https://img.shields.io/vso/build/sergeykonkin/e640aa5e-254c-4469-8857-a4e79ac456ab/17.svg)]()
 [![NuGet Package](https://img.shields.io/nuget/v/SettingsMapper.svg)](https://www.nuget.org/packages/SettingsMapper)
 
-# SettingsMapper
-
-Simple yet extensible .NET Standard 2.0 library for mapping settings to strong types.
-
-## Quick start
+# Quick start
 
 An `App.config` file:
 ```xml
@@ -57,7 +53,7 @@ Code:
 MyConfig config = AppSettings.MapTo<MyConfig>();
 ```
 
-### Static Type Mapping
+## Static Type Mapping
 
 Static settings class:
 ```csharp
@@ -84,7 +80,7 @@ AppSettings.MapToStatic(typeof(MyConfig));
 ```
 Note that nested types are supported for static mapping
 
-### Converters
+## Converters
 **SettingsMapper** comes with set of default converters,  but if they are not enough, you can implement either `ISettingConverter` interface or derive from `SettingConverterBase{TValue}` class and pass additional converters to settings builder constructor:
 
 ```csharp
@@ -97,12 +93,12 @@ Custom converters have higher priority than default one, so if some default conv
 **Special case:** Built-in `NullableConverter` and `ArrayConverter` will automatically support new custom converters. For example, if custom converter provides conversion behavior for `MyType`, you don't need to create separate `MyType?` or `MyType[]` (or even `MyType?[]`) converters.
 
 
-## Installation
+# Installation
 
 ```
 Install-Package SettingsMapper
 ```
 
-## License
+# License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
