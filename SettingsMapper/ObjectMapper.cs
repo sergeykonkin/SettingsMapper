@@ -18,6 +18,7 @@ namespace SettingsMapper
         public IEnumerable<BindingProp> GetProps(Type targetType) =>
             targetType
                 .GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                .Where(prop => prop.CanWrite)
                 .Select(BindingProp.FromProperty);
 
         /// <inheritdoc />

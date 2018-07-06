@@ -6,7 +6,7 @@ namespace SettingsMapper
     /// Nested settings custom prefix.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Property)]
-    public sealed class SettingPrefixAttribute : Attribute
+    public sealed class PrefixAttribute : Attribute
     {
         /// <summary>
         /// Gets the value of custom prefix.
@@ -14,10 +14,10 @@ namespace SettingsMapper
         public string Value { get; }
 
         /// <summary>
-        /// Initializes new instance of <see cref="SettingPrefixAttribute" />
+        /// Initializes new instance of <see cref="PrefixAttribute" />
         /// </summary>
         /// <param name="value">Value of custom prefix.</param>
-        public SettingPrefixAttribute(string value)
+        public PrefixAttribute(string value)
         {
             if (string.IsNullOrWhiteSpace(value))
                 throw new ArgumentException("Value cannot be null or whitespace.", nameof(value));

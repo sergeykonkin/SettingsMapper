@@ -56,20 +56,19 @@ namespace SettingsMapper
         internal virtual object Build(Type targetType, string prefix = null)
         {
             var target = Mapper.CreateTarget(targetType);
-            var props = Mapper.GetProps(targetType).ToList();
+            var props = Mapper.GetProps(targetType).Where(p => !p.IsIgnored).ToList();
 
             foreach (var prop in props)
             {
-                string name = prop.Name;
                 Type type = prop.Type;
 
                 if (type != typeof(string) && !CanConvert(type))
                 {
                     try
                     {
-                        string newPrefix = (prefix ?? "") + (prop.CustomPrefix ?? name) + ".";
+                        string newPrefix = (prefix ?? "") + (prop.CustomPrefix ?? prop.SettingName) + ".";
                         object inner = Build(type, newPrefix);
-                        Mapper.Map(target, targetType, name, inner);
+                        Mapper.Map(target, targetType, prop.PropName, inner);
                         continue;
                     }
                     catch (Exception ex)
@@ -81,32 +80,41 @@ namespace SettingsMapper
                 }
 
                 string settingName = !string.IsNullOrWhiteSpace(prefix)
-                    ? prefix + name
-                    : name;
+                    ? prefix + prop.SettingName
+                    : prop.SettingName;
 
                 var stringValue = _settingsProvider.Get(settingName);
-                if (string.IsNullOrWhiteSpace(stringValue) && type.IsNonNullableValueType())
+                if (string.IsNullOrWhiteSpace(stringValue))
                 {
-                    throw new InvalidOperationException(
-                        $"Null value encountered for value type setting {name} (of type {type}).");
+                    if (type.IsNonNullableValueType() && !prop.HasDefaultValue)
+                    {
+                        throw new InvalidOperationException(
+                            $"Null value encountered for value type setting {prop.PropName} (of type {type}).");
+                    }
+
+                    if (prop.HasDefaultValue)
+                    {
+                        Mapper.Map(target, targetType, prop.PropName, prop.DefaultValue);
+                        continue;
+                    }
                 }
 
                 if (type == typeof(string))
                 {
-                    Mapper.Map(target, targetType, name, stringValue);
+                    Mapper.Map(target, targetType, prop.PropName, stringValue);
                     continue;
                 }
 
                 ISettingConverter converter = _converters.First(c => c.CanConvert(type));
                 object convertedValue = converter.Convert(stringValue, type);
-                Mapper.Map(target, targetType, name, convertedValue);
+                Mapper.Map(target, targetType, prop.PropName, convertedValue);
             }
 
             return target;
         }
 
         /// <summary>
-        /// Gets required inner type description for friendly exception message.
+        /// Gets required inner type description for exception message.
         /// </summary>
         protected virtual string TypeDesc => "simple { get; set; } POCO with parameterless constructor";
     }

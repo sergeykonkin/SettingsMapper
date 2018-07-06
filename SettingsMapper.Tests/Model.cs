@@ -1,4 +1,5 @@
 ﻿using System;
+using SettingsMapper.Attributes;
 
 namespace SettingsMapper.Tests
 {
@@ -15,9 +16,21 @@ namespace SettingsMapper.Tests
         public class PocoWithInner
         {
             public Inner Inner { get; set; }
+        }
 
-            [SettingPrefix("foo")]
+        public class PocoWithAttributes
+        {
+            [Default(5)]
+            public int Int { get; set; }
+
+            [Ignore]
+            public string String { get; set; }
+
+            [Prefix("foo")]
             public Inner InnerPrefixed { get; set; }
+
+            [Name("Bar")]
+            public double? NullableDouble { get; set; }
         }
 
         // Static:
@@ -32,8 +45,23 @@ namespace SettingsMapper.Tests
         {
             public static Inner Inner { get; set; }
 
-            [SettingPrefix("foo")]
+            [Prefix("foo")]
             public static Inner InnerPrefixed { get; set; }
+        }
+
+        public static class StaticWithAttributes
+        {
+            [Default(5)]
+            public static int Int { get; set; }
+
+            [Ignore]
+            public static string String { get; set; }
+
+            [Prefix("foo")]
+            public static Inner InnerPrefixed { get; set; }
+
+            [Name("Bar")]
+            public static double? NullableDouble { get; set; }
         }
 
         public static class StaticWithNested
@@ -43,35 +71,11 @@ namespace SettingsMapper.Tests
                 public static int Int { get; set; }
             }
 
-            [SettingPrefix("foo")]
+            [Prefix("foo")]
             public static class NestedPrefixed
             {
                 public static int Int { get; set; }
             }
-        }
-
-        // Dynamic:
-        public interface IDynamic
-        {
-            int Int { get; }
-            string String { get; }
-            double? NullableDouble { get; }
-        }
-
-        public interface IDynamicWithInner
-        {
-            Inner Inner { get; }
-
-            [SettingPrefix("foo")]
-            Inner InnerPrefixed { get; }
-        }
-
-        public interface IDynamicWithIInner
-        {
-            IInner Inner { get; }
-
-            [SettingPrefix("foo")]
-            IInner InnerPrefixed { get; }
         }
 
         // Service:

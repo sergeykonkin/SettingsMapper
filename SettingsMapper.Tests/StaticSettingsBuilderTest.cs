@@ -59,6 +59,27 @@ namespace SettingsMapper.Tests
         }
 
         [Test(TestOf = typeof(StaticSettingsBuilder))]
+        [TestCase(TestName = "Should respect attributes")]
+        public void StaticSettingsBuilderShouldRespectAttributes()
+        {
+            var settingsType = typeof(Model.StaticWithAttributes);
+            var settingsProvider = new Mock<ISettingsProvider>();
+            var staticSettingsBuilder = new StaticSettingsBuilder(settingsProvider.Object);
+            settingsProvider.Setup(sp => sp.Get("foo.Int")).Returns("10");
+            settingsProvider.Setup(sp => sp.Get("Bar")).Returns("1.1");
+            settingsProvider.Setup(sp => sp.Get("String")).Returns("Value");
+
+            staticSettingsBuilder.MapTo(settingsType);
+
+            Assert.AreEqual(5, Model.StaticWithAttributes.Int);
+            Assert.IsNull(Model.StaticWithAttributes.String);
+            Assert.NotNull(Model.StaticWithAttributes.InnerPrefixed);
+            Assert.AreEqual(10, Model.StaticWithAttributes.InnerPrefixed.Int);
+            Assert.AreEqual(1.1d, Model.StaticWithAttributes.NullableDouble);
+            settingsProvider.Verify(sp => sp.Get(It.IsAny<string>()), Times.Exactly(3));
+        }
+
+        [Test(TestOf = typeof(StaticSettingsBuilder))]
         [TestCase(TestName = "Should throw if non-static class type passed")]
         public void StaticSettingsBuilderShouldThrowIfNonStaticClassTypePassed()
         {

@@ -1,32 +1,63 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Reflection;
+using SettingsMapper.Attributes;
 
 namespace SettingsMapper
 {
     [DebuggerDisplay("{Name}:{Type}")]
     internal class BindingProp
     {
-        public string Name { get; }
+        public string PropName { get; private set; }
 
-        public Type Type { get; }
+        public string SettingName { get; private set; }
 
-        public string CustomPrefix { get; }
+        public Type Type { get; private set; }
 
-        private BindingProp(string name, Type type, string prefix)
+        public string CustomPrefix { get; private set; }
+
+        public object DefaultValue { get; private set; }
+
+        public bool HasDefaultValue => DefaultValue != null;
+
+        public bool IsIgnored { get; private set; }
+
+        private BindingProp()
         {
-            Name = name;
-            Type = type;
-            CustomPrefix = prefix;
         }
 
         public static BindingProp FromType(Type type) =>
-            new BindingProp(type.Name, type, GetPrefixAttributeValue(type));
+            new BindingProp
+            {
+                PropName = type.Name,
+                SettingName = GetNameAttr(type),
+                Type = type,
+                CustomPrefix = GetPrefixAttr(type),
+                DefaultValue = GetDefaultAttr(type),
+                IsIgnored = GetIgnoredAttr(type)
+            };
 
         public static BindingProp FromProperty(PropertyInfo prop) =>
-            new BindingProp(prop.Name, prop.PropertyType, GetPrefixAttributeValue(prop));
+            new BindingProp
+            {
+                PropName = prop.Name,
+                SettingName = GetNameAttr(prop),
+                Type = prop.PropertyType,
+                CustomPrefix = GetPrefixAttr(prop),
+                DefaultValue = GetDefaultAttr(prop),
+                IsIgnored = GetIgnoredAttr(prop)
+            };
 
-        private static string GetPrefixAttributeValue(MemberInfo memberInfo) =>
-            memberInfo.GetSingleCustomAttribute<SettingPrefixAttribute>()?.Value;
+        private static string GetNameAttr(MemberInfo memberInfo) =>
+            memberInfo.GetSingleCustomAttribute<NameAttribute>()?.Value ?? memberInfo.Name;
+
+        private static string GetPrefixAttr(MemberInfo memberInfo) =>
+            memberInfo.GetSingleCustomAttribute<PrefixAttribute>()?.Value;
+
+        private static object GetDefaultAttr(MemberInfo memberInfo) =>
+            memberInfo.GetSingleCustomAttribute<DefaultAttribute>()?.Value;
+
+        private static bool GetIgnoredAttr(MemberInfo memberInfo) =>
+            memberInfo.GetSingleCustomAttribute<IgnoreAttribute>() != null;
     }
 }

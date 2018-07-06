@@ -24,22 +24,39 @@ namespace SettingsMapper.Tests
             settingsProvider.Verify(sp => sp.Get(It.IsAny<string>()), Times.Exactly(3));
         }
 
-        [Test(TestOf = typeof(PocoSettingsBuilder<Model.Poco>))]
+        [Test(TestOf = typeof(PocoSettingsBuilder<Model.PocoWithInner>))]
         [TestCase(TestName = "Should build inner POCO settings object")]
         public void PocoSettingsBuilderShouldBuildInnerPocoObject()
         {
             var settingsProvider = new Mock<ISettingsProvider>();
             var pocoSettingsBuilder = new PocoSettingsBuilder<Model.PocoWithInner>(settingsProvider.Object);
             settingsProvider.Setup(sp => sp.Get("Inner.Int")).Returns("5");
-            settingsProvider.Setup(sp => sp.Get("foo.Int")).Returns("10");
 
             var result = pocoSettingsBuilder.Create();
 
             Assert.NotNull(result.Inner);
-            Assert.NotNull(result.InnerPrefixed);
             Assert.AreEqual(5, result.Inner.Int);
+            settingsProvider.Verify(sp => sp.Get(It.IsAny<string>()), Times.Once);
+        }
+
+        [Test(TestOf = typeof(PocoSettingsBuilder<Model.PocoWithAttributes>))]
+        [TestCase(TestName = "Should respect attributes")]
+        public void ObjectSettingsBuilderShouldRespectAttributes()
+        {
+            var settingsProvider = new Mock<ISettingsProvider>();
+            var pocoSettingsBuilder = new PocoSettingsBuilder<Model.PocoWithAttributes>(settingsProvider.Object);
+            settingsProvider.Setup(sp => sp.Get("foo.Int")).Returns("10");
+            settingsProvider.Setup(sp => sp.Get("Bar")).Returns("1.1");
+            settingsProvider.Setup(sp => sp.Get("String")).Returns("Value");
+
+            var result = pocoSettingsBuilder.Create();
+
+            Assert.AreEqual(5, result.Int);
+            Assert.IsNull(result.String);
+            Assert.NotNull(result.InnerPrefixed);
             Assert.AreEqual(10, result.InnerPrefixed.Int);
-            settingsProvider.Verify(sp => sp.Get(It.IsAny<string>()), Times.Exactly(2));
+            Assert.AreEqual(1.1d, result.NullableDouble);
+            settingsProvider.Verify(sp => sp.Get(It.IsAny<string>()), Times.Exactly(3));
         }
     }
 }
