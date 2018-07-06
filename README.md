@@ -1,5 +1,4 @@
-﻿[![AppVeyor Build](https://img.shields.io/appveyor/ci/sergeykonkin/SettingsMapper.svg)](https://ci.appveyor.com/project/sergeykonkin/SettingsMapper)
-[![AppVeyor Tests](https://img.shields.io/appveyor/tests/sergeykonkin/SettingsMapper.svg)](https://ci.appveyor.com/project/sergeykonkin/SettingsMapper/build/tests)
+﻿[![Build status](https://img.shields.io/vso/build/sergeykonkin/e640aa5e-254c-4469-8857-a4e79ac456ab/17.svg)]()
 [![NuGet Package](https://img.shields.io/nuget/v/SettingsMapper.svg)](https://www.nuget.org/packages/SettingsMapper)
 
 # SettingsMapper
