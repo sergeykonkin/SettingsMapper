@@ -1,14 +1,14 @@
-[![AppVeyor Build](https://img.shields.io/appveyor/ci/sergeykonkin/tigrsettings.svg)](https://ci.appveyor.com/project/sergeykonkin/tigrsettings)
-[![AppVeyor Tests](https://img.shields.io/appveyor/tests/sergeykonkin/tigrsettings.svg)](https://ci.appveyor.com/project/sergeykonkin/tigrsettings/build/tests)
-[![NuGet Package](https://img.shields.io/nuget/v/TigrSettings.svg)](https://www.nuget.org/packages/TigrSettings)
+﻿[![AppVeyor Build](https://img.shields.io/appveyor/ci/sergeykonkin/SettingsMapper.svg)](https://ci.appveyor.com/project/sergeykonkin/SettingsMapper)
+[![AppVeyor Tests](https://img.shields.io/appveyor/tests/sergeykonkin/SettingsMapper.svg)](https://ci.appveyor.com/project/sergeykonkin/SettingsMapper/build/tests)
+[![NuGet Package](https://img.shields.io/nuget/v/SettingsMapper.svg)](https://www.nuget.org/packages/SettingsMapper)
 
-# TigrSettings
+# SettingsMapper
 
 Simple yet extensible .NET Standard 2.0 library for mapping settings to strong types.
 
 ## Getting Started
 
-**TigrSettings** supports 3 different builders: `PocoSettingsBuilder{T}`, `StaticSettingsBuilder` and `DynamicSettingsBuilder{T}`
+**SettingsMapper** supports 3 different builders: `PocoSettingsBuilder{T}`, `StaticSettingsBuilder` and `DynamicSettingsBuilder{T}`
 and 2 providers: `AppSettingsProvider` and `EnvironmentVariablesProvider`.
 
 ### POCO builder
@@ -123,7 +123,7 @@ IAppSettings appSettings = dynamicBuilder.Create();
 
 
 ### Converters
-**TigrSettings** comes with set of default converters,  but if they are not enough, you can implement either `ISettingConverter` interface or derive from `SettingConverterBase{TValue}` class and pass additional converters to settings builder constructor:
+**SettingsMapper** comes with set of default converters,  but if they are not enough, you can implement either `ISettingConverter` interface or derive from `SettingConverterBase{TValue}` class and pass additional converters to settings builder constructor:
 
 ```csharp
 ISettingsProvider myConverter = new MySettingValueConverter();
@@ -140,7 +140,7 @@ Custom converter of some type has higher priority than default one, so if some d
 Since version 2.0.0 all packages were merged into single:
 
 ```
-Install-Package TigrSettings
+Install-Package SettingsMapper
 ```
 
 
