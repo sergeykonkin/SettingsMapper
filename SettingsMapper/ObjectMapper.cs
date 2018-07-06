@@ -5,10 +5,11 @@ using System.Reflection;
 
 namespace SettingsMapper
 {
+    /// <inheritdoc />
     /// <summary>
-    /// Mapper for Poco objects.
+    /// Mapper for objects.
     /// </summary>
-    internal class PocoMapper : IMapper
+    internal class ObjectMapper : IMapper
     {
         /// <inheritdoc />
         public object CreateTarget(Type targetType) => Activator.CreateInstance(targetType);

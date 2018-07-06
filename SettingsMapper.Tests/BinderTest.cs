@@ -7,13 +7,13 @@ namespace SettingsMapper.Tests
     public class MapersTest
     {
         private const string PocoMapperTestName = "Should set public property {0} to value {1}";
-        [Test(TestOf = typeof(PocoMapper))]
+        [Test(TestOf = typeof(ObjectMapper))]
         [TestCase("Int", 5, TestName = PocoMapperTestName)]
         [TestCase("String", "foobar", TestName = PocoMapperTestName)]
         [TestCase("NullableDouble", null, TestName = PocoMapperTestName)]
         public void PocoMapperTest(string propName, object value)
         {
-            var pocoMapper = new PocoMapper();
+            var pocoMapper = new ObjectMapper();
             Type targetType = typeof(Model.Poco);
             object target = pocoMapper.CreateTarget(targetType);
 

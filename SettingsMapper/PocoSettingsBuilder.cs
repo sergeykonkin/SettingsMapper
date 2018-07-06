@@ -6,50 +6,44 @@ namespace SettingsMapper
     /// <summary>
     /// Provides functionality to map raw settings to Poco objects.
     /// </summary>
-    public class PocoSettingsBuilder : SettingsBuilderBase
+    public class PocoSettingsBuilder<TSettings> : SettingsBuilderBase
+        where TSettings : class, new()
     {
-        private readonly Type _settingsType;
-
         /// <summary>
-        /// Initializes a new instance of <see cref="PocoSettingsBuilder"/>.
+        /// Initializes a new instance of <see cref="PocoSettingsBuilder{TSettings}"/>.
         /// </summary>
-        /// <param name="settingsType"></param>
         /// <param name="settingsProvider">Raw string settings provider.</param>
         /// <param name="converters">Set of additional converters.</param>
         public PocoSettingsBuilder(
-            Type settingsType,
             ISettingsProvider settingsProvider,
             params ISettingConverter[] converters)
-            : this(settingsType, settingsProvider, CultureInfo.InvariantCulture, converters)
+            : this(settingsProvider, CultureInfo.InvariantCulture, converters)
         {
         }
 
         /// <summary>
-        /// Initializes a new instance of <see cref="PocoSettingsBuilder"/>.
+        /// Initializes a new instance of <see cref="PocoSettingsBuilder{TSettings}"/>.
         /// </summary>
-        /// <param name="settingsType"></param>
         /// <param name="settingsProvider">Raw string settings provider.</param>
         /// <param name="formatProvider">Format provider for e.g. numbers and dates.</param>
         /// <param name="converters">Set of additional converters.</param>
         public PocoSettingsBuilder(
-            Type settingsType,
             ISettingsProvider settingsProvider,
             IFormatProvider formatProvider,
             params ISettingConverter[] converters)
             : base(settingsProvider, formatProvider, converters)
         {
-            _settingsType = settingsType;
         }
 
         /// <summary>
-        /// Creates new instance of settings with properties filled with converted settings.
+        /// Creates new instance of <typeparamref name="TSettings"/> with properties filled with converted settings.
         /// </summary>
         /// <returns>Poco object instance.</returns>
-        public object Create()
+        public TSettings Create()
         {
-            return base.Build(_settingsType) ?? Activator.CreateInstance(_settingsType);
+            return (TSettings) base.Build(typeof(TSettings)) ?? new TSettings();
         }
 
-        internal override IMapper Mapper { get; } = new PocoMapper();
+        internal override IMapper Mapper { get; } = new ObjectMapper();
     }
 }

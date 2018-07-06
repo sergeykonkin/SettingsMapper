@@ -3,19 +3,20 @@ using NUnit.Framework;
 
 namespace SettingsMapper.Tests
 {
-    public class PocoSettingsBuilderTTest
+    public class ObjectSettingsBuilderTest
     {
-        [Test(TestOf = typeof(PocoSettingsBuilder<Model.Poco>))]
-        [TestCase(TestName = "Should build POCO settings object")]
-        public void PocoSettingsBuilderShouldBuildPocoSettingsObject()
+        [Test(TestOf = typeof(ObjectSettingsBuilder))]
+        [TestCase(TestName = "Should build settings object")]
+        public void ObjectSettingsBuilderShouldBuildPocoSettingsObject()
         {
+            var settingsType = typeof(Model.Poco);
             var settingsProvider = new Mock<ISettingsProvider>();
             settingsProvider.Setup(sp => sp.Get("Int")).Returns("5");
             settingsProvider.Setup(sp => sp.Get("String")).Returns("foobar");
             settingsProvider.Setup(sp => sp.Get("NullableDouble")).Returns(null as string);
-            var pocoSettingsBuilder = new PocoSettingsBuilder<Model.Poco>(settingsProvider.Object);
+            var pocoSettingsBuilder = new ObjectSettingsBuilder(settingsType, settingsProvider.Object);
 
-            var result = pocoSettingsBuilder.Create();
+            var result = (Model.Poco)pocoSettingsBuilder.Create();
 
             Assert.AreEqual(5, result.Int);
             Assert.AreEqual("foobar", result.String);
@@ -25,15 +26,16 @@ namespace SettingsMapper.Tests
         }
 
         [Test(TestOf = typeof(PocoSettingsBuilder<Model.Poco>))]
-        [TestCase(TestName = "Should build inner POCO settings object")]
-        public void PocoSettingsBuilderShouldBuildInnerPocoObject()
+        [TestCase(TestName = "Should build inner settings object")]
+        public void ObjectSettingsBuilderShouldBuildInnerPocoObject()
         {
+            var settingsType = typeof(Model.PocoWithInner);
             var settingsProvider = new Mock<ISettingsProvider>();
-            var pocoSettingsBuilder = new PocoSettingsBuilder<Model.PocoWithInner>(settingsProvider.Object);
+            var pocoSettingsBuilder = new ObjectSettingsBuilder(settingsType, settingsProvider.Object);
             settingsProvider.Setup(sp => sp.Get("Inner.Int")).Returns("5");
             settingsProvider.Setup(sp => sp.Get("foo.Int")).Returns("10");
 
-            var result = pocoSettingsBuilder.Create();
+            var result = (Model.PocoWithInner)pocoSettingsBuilder.Create();
 
             Assert.NotNull(result.Inner);
             Assert.NotNull(result.InnerPrefixed);

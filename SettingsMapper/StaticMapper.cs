@@ -5,6 +5,7 @@ using System.Reflection;
 
 namespace SettingsMapper
 {
+    /// <inheritdoc />
     /// <summary>
     /// Mapper for Static classes.
     /// </summary>

@@ -12,7 +12,7 @@ namespace SettingsMapper
         /// <summary>
         /// Creates new instance of <typeparamref name="TSettings"/> with properties filled with converted settings.
         /// </summary>
-        /// <returns>Poco object instance.</returns>
+        /// <returns>POCO settings object.</returns>
         public static TSettings MapTo<TSettings>() where TSettings : class, new()
         {
             return new PocoSettingsBuilder<TSettings>(_provider).Create();
@@ -21,10 +21,11 @@ namespace SettingsMapper
         /// <summary>
         /// Creates new instance of settings with properties filled with converted settings.
         /// </summary>
-        /// <returns>Poco object instance.</returns>
+        /// <param name="type">Settings object type.</param>
+        /// <returns>Settings object.</returns>
         public static object MapTo(Type type)
         {
-            return new PocoSettingsBuilder(type, _provider).Create();
+            return new ObjectSettingsBuilder(type, _provider).Create();
         }
 
         /// <summary>
