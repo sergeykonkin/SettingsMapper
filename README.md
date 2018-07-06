@@ -50,7 +50,10 @@ public class MyType
 
 Code:
 ```csharp
-MyConfig config = AppSettings.MapTo<MyConfig>();
+ISettingsProvider settingsProvider = new AppSettingsProvider(); 
+
+var pocoBuilder = new PocoSettingsBuilder<MyConfig>(settingsProvider);
+MyConfig config = pocoBuilder.Create();
 ```
 
 ## Static Type Mapping
@@ -76,7 +79,10 @@ public static class MyConfig
 
 Code:
 ```csharp
-AppSettings.MapToStatic(typeof(MyConfig));
+ISettingsProvider settingsProvider = new AppSettingsProvider(); 
+
+var staticBuilder = new StaticSettingsBuilder(settingsProvider);
+staticBuilder.MapTo(typeof(MyConfig));
 ```
 Note that nested types are supported for static mapping
 
