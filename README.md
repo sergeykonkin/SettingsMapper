@@ -6,121 +6,84 @@
 
 Simple yet extensible .NET Standard 2.0 library for mapping settings to strong types.
 
-## Getting Started
+## Quick start
 
-**SettingsMapper** supports 3 different builders: `PocoSettingsBuilder{T}`, `StaticSettingsBuilder` and `DynamicSettingsBuilder{T}`
-and 2 providers: `AppSettingsProvider` and `EnvironmentVariablesProvider`.
-
-### POCO builder
-Lets say we have following `App.config`:
+An `App.config` file:
 ```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <configuration>
     <appSettings>
-        <add key="Int" value="5" />
+        <add key="Int" value="5" /> 
         <add key="String" value="foobar" />
         <add key="Guid" value="9d50f0fb-4127-4433-b062-7ecf211a2adb" />
-        <add key="Enum" value="Foo|Baz" />  <!-- Note that [Flags] are supported -->
+        <add key="Enum" value="Foo|Baz" />
         <add key="DateTime" value="2018-04-21T12:34:56.789Z" />
         <add key="ArrayOfTimeSpans" value="00:00:05, 00:00:10, 00:00:15" />
         <add key="NullableBoolean" value="null" />
-        <add key="Inner.Int" value="7" /> <!-- Custom types are supported with prefixes -->
+        <add key="MyType.InnerProp" value="7" />
     </appSettings>
 </configuration>
 ```
 
-And a POCO settings class:
+POCO settings class:
 ```csharp
-public class AppSettings
+public class MyConfig
 {
     public int Int { get; set; }
     public string String { get; set; }
     public Guid Guid { get; set; }
-    public EnumSetting Enum { get; set; }
+    public MyFlagsEnum Enum { get; set; }
     public DateTime DateTime { get; set; }
     public TimeSpan[] ArrayOfTimeSpans { get; set; }
     public bool? NullableBoolean { get; set; }
-    public Inner Inner { get; set; } // Custom prefix can be specified with [SettingPrefix("foo")] attribute
+    public MyType MyType { get; set; }
 }
 
 [Flags]
-public enum EnumSetting
+public enum MyFlagsEnum
 {
     Foo = 1,
     Bar = 2,
     Baz = 4
 }
 
-public class Inner
+public class MyType
 {
-    public int Int { get; set; }
+    public int InnerProp { get; set; }
 }
 ```
 
-Usage:
+Code:
 ```csharp
-ISettingsProvider settingsProvider = new AppSettingsProvider(); 
-
-var pocoBuilder = new PocoSettingsBuilder<AppSettings>(settingsProvider);
-AppSettings appSettings = pocoBuilder.Create();
+MyConfig config = AppSettings.MapTo<MyConfig>();
 ```
 
-### Static builder
+### Static Type Mapping
 
 Static settings class:
 ```csharp
-public static class AppSettings
+public static class MyConfig
 {
     public static int Int { get; set; }
     public static string String { get; set; }
     public static Guid Guid { get; set; }
-    public static EnumSetting Enum { get; set; }
+    public static MyFlagsEnum Enum { get; set; }
     public static DateTime DateTime { get; set; }
     public static TimeSpan[] ArrayOfTimeSpans { get; set; }
     public static bool? NullableBoolean { get; set; }
-    public static Inner Inner { get; set; }
-    public static class Nested  // StaticSettingsBuilder has a support for nested static classes (by prefixes, like custom type props)
+    public static MyType MyType { get; set; }
+    public static class NestedClass
     {
-        public static int Int { get; set; }
+        public static int NestedProp { get; set; }
     }
 }
 ```
 
-Usage:
+Code:
 ```csharp
-ISettingsProvider settingsProvider = new AppSettingsProvider(); 
-
-var staticBuilder = new StaticSettingsBuilder(settingsProvider);
-staticBuilder.MapTo(typeof(AppSettings));
+AppSettings.MapToStatic(typeof(MyConfig));
 ```
-### Dynamic builder
-
-Dynamic builder allows to create dynamic settings object that acts like specified interface. This may be useful for DI and/or mocking.
-
-Interface:
-```csharp
-public interface IAppSettings
-{
-    int Int { get; }
-    string String { get; }
-    Guid Guid { get; }
-    EnumSetting Enum { get; }
-    DateTime DateTime { get; }
-    TimeSpan[] ArrayOfTimeSpans { get; }
-    bool? NullableBoolean { get; }
-    Inner Inner { get; }    // DynamicSettingsBuilder supports both POCO types
-    IInner IInner { get; }   // and another dynamic interfaces as inner types
-}
-```
-
-Usage:
-```csharp
-ISettingsProvider settingsProvider = new AppSettingsProvider(); 
-
-var dynamicBuilder = new DynamicSettingsBuilder<IAppSettings>(settingsProvider);
-IAppSettings appSettings = dynamicBuilder.Create();
-```
-
+Note that nested types are supported for static mapping
 
 ### Converters
 **SettingsMapper** comes with set of default converters,  but if they are not enough, you can implement either `ISettingConverter` interface or derive from `SettingConverterBase{TValue}` class and pass additional converters to settings builder constructor:
@@ -128,26 +91,18 @@ IAppSettings appSettings = dynamicBuilder.Create();
 ```csharp
 ISettingsProvider myConverter = new MySettingValueConverter();
 ISettingsProvider myAnotherConverter = new MyAnotherSettingValueConverter();
-var builder = new PocoSettingsBuilder<AppSettings>(settingsProvider, myConverter, myAnotherConverter);
+var builder = new PocoSettingsBuilder<MyConfig>(settingsProvider, myConverter, myAnotherConverter);
 ```
-Custom converter of some type has higher priority than default one, so if some default converter provides insufficient functionality - it can be overwritten.
+Custom converters have higher priority than default one, so if some default converter provides insufficient functionality - it can be overwritten.
 
 **Special case:** Built-in `NullableConverter` and `ArrayConverter` will automatically support new custom converters. For example, if custom converter provides conversion behavior for `MyType`, you don't need to create separate `MyType?` or `MyType[]` (or even `MyType?[]`) converters.
 
 
-## Installing
-
-Since version 2.0.0 all packages were merged into single:
+## Installation
 
 ```
 Install-Package SettingsMapper
 ```
-
-
-## Built With
-
-* [ImpromptuInterface](https://github.com/ekonbenefits/impromptu-interface) - for `DynamicSettingsBuilder` implementation
-
 
 ## License
 
