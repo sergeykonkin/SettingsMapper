@@ -3,8 +3,16 @@ using System.Collections.Generic;
 
 namespace SettingsMapper.Converters
 {
+    /// <summary>
+    /// Helper for getting all default setting converters.
+    /// </summary>
     public static class DefaultConverters
     {
+        /// <summary>
+        /// Gets all default setting converters.
+        /// </summary>
+        /// <param name="formatProvider">Format provider.</param>
+        /// <returns>All default setting converters.</returns>
         public static ISettingConverter[] GetAll(IFormatProvider formatProvider = null)
         {
             var list = new List<ISettingConverter>
