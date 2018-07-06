@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using NUnit.Framework;
 
 namespace SettingsMapper.Tests
@@ -41,25 +40,6 @@ namespace SettingsMapper.Tests
 
             var prop = typeof(Model.Static).GetProperty(propName);
             var result = prop.GetValue(null);
-
-            Assert.AreEqual(value, result);
-        }
-
-        private const string DynamicBinderTestName = "Should set public property {0} to value {1}";
-        [Test(TestOf = typeof(DynamicBinder))]
-        [TestCase("Int", 5, TestName = DynamicBinderTestName)]
-        [TestCase("String", "foobar", TestName = DynamicBinderTestName)]
-        [TestCase("NullableDouble", null, TestName = DynamicBinderTestName)]
-        public void DynamicBinderTest(string propName, object value)
-        {
-            var dynamicBinder = new DynamicBinder();
-            Type targetType = typeof(Model.IDynamic);
-            object target = dynamicBinder.CreateTarget(targetType);
-
-            dynamicBinder.Bind(target, targetType, propName, value);
-
-            var dict = (IDictionary<string, object>)target;
-            var result = dict[propName];
 
             Assert.AreEqual(value, result);
         }

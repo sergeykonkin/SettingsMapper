@@ -35,14 +35,5 @@ namespace SettingsMapper
         {
             new StaticSettingsBuilder(_provider).MapTo(staticType);
         }
-
-        /// <summary>
-        /// Creates new instance of dynamic object that implements <typeparamref name="TSettings"/> with properties filled with converted settings.
-        /// </summary>
-        /// <returns>Dynamic object instance.</returns>
-        public static TSettings CreateDynamic<TSettings>() where TSettings : class
-        {
-            return new DynamicSettingsBuilder<TSettings>(_provider).Create();
-        }
     }
 }
