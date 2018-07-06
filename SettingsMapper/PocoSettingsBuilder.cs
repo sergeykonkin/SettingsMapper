@@ -4,7 +4,7 @@ using System.Globalization;
 namespace SettingsMapper
 {
     /// <summary>
-    /// Provides functionality to bind raw settings to Poco objects.
+    /// Provides functionality to map raw settings to Poco objects.
     /// </summary>
     public class PocoSettingsBuilder : SettingsBuilderBase
     {
@@ -50,6 +50,6 @@ namespace SettingsMapper
             return base.Build(_settingsType) ?? Activator.CreateInstance(_settingsType);
         }
 
-        internal override IBinder Binder { get; } = new PocoBinder();
+        internal override IMapper Mapper { get; } = new PocoMapper();
     }
 }

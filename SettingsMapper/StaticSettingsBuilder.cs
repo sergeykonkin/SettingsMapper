@@ -4,7 +4,7 @@ using System.Globalization;
 namespace SettingsMapper
 {
     /// <summary>
-    /// Provides functionality to bind raw settings to Static classes.
+    /// Provides functionality to map raw settings to Static classes.
     /// </summary>
     public class StaticSettingsBuilder : SettingsBuilderBase
     {
@@ -47,7 +47,7 @@ namespace SettingsMapper
         }
 
         /// <inheritdoc />
-        internal override IBinder Binder { get; } = new StaticBinder();
+        internal override IMapper Mapper { get; } = new StaticMapper();
 
         /// <inheritdoc />
         protected override string TypeDesc => base.TypeDesc + " or nested static class";

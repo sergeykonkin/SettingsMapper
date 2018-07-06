@@ -20,7 +20,7 @@ namespace SettingsMapper.Tests
             {
             }
 
-            internal override IBinder Binder { get; } = new PocoBinder();
+            internal override IMapper Mapper { get; } = new PocoMapper();
         }
 
         private const string ShouldBeAbleToConvertByDefault = "Should be able to convert {0} by default";

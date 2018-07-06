@@ -4,31 +4,31 @@ using System.Collections.Generic;
 namespace SettingsMapper
 {
     /// <summary>
-    /// Provides functionality to bind provided values to target's properties.
+    /// Provides functionality to map provided values to target's properties.
     /// </summary>
-    internal interface IBinder
+    internal interface IMapper
     {
         /// <summary>
-        /// Creates new target properties must bind to.
+        /// Creates new target.
         /// </summary>
         /// <param name="targetType">Target's type.</param>
         /// <returns>Target object.</returns>
         object CreateTarget(Type targetType);
 
         /// <summary>
-        /// Gets target object's properties to bind.
+        /// Gets target object's properties to map.
         /// </summary>
         /// <param name="targetType">Target's type.</param>
-        /// <returns>Properties bind to.</returns>
+        /// <returns>Properties for mapping.</returns>
         IEnumerable<BindingProp> GetProps(Type targetType);
 
         /// <summary>
-        /// Binds propvided value to specified property.
+        /// Maps propvided value to specified property.
         /// </summary>
-        /// <param name="target">Target bind to.</param>
+        /// <param name="target">Target object.</param>
         /// <param name="targetType">Target's type.</param>
         /// <param name="name">Property name.</param>
         /// <param name="value">Value to set.</param>
-        void Bind(object target, Type targetType, string name, object value);
+        void Map(object target, Type targetType, string name, object value);
     }
 }

@@ -6,9 +6,9 @@ using System.Reflection;
 namespace SettingsMapper
 {
     /// <summary>
-    /// Binder for Static classes.
+    /// Mapper for Static classes.
     /// </summary>
-    internal class StaticBinder : IBinder
+    internal class StaticMapper : IMapper
     {
         /// <inheritdoc />
         public object CreateTarget(Type targetType) =>
@@ -28,7 +28,7 @@ namespace SettingsMapper
                         .Select(BindingProp.FromType));
 
         /// <inheritdoc />
-        public void Bind(object target, Type targetType, string name, object value)
+        public void Map(object target, Type targetType, string name, object value)
             => targetType.GetProperty(name)?.SetValue(target, value, null);
     }
 }

@@ -5,7 +5,7 @@ namespace SettingsMapper
     /// <summary>
     /// Static helper for AppSettings mapping.
     /// </summary>
-    public static class AppSettingsMapper
+    public static class AppSettings
     {
         private static readonly AppSettingsProvider _provider = new AppSettingsProvider();
 
@@ -13,7 +13,7 @@ namespace SettingsMapper
         /// Creates new instance of <typeparamref name="TSettings"/> with properties filled with converted settings.
         /// </summary>
         /// <returns>Poco object instance.</returns>
-        public static TSettings Create<TSettings>() where TSettings : class, new()
+        public static TSettings MapTo<TSettings>() where TSettings : class, new()
         {
             return new PocoSettingsBuilder<TSettings>(_provider).Create();
         }
@@ -22,7 +22,7 @@ namespace SettingsMapper
         /// Creates new instance of settings with properties filled with converted settings.
         /// </summary>
         /// <returns>Poco object instance.</returns>
-        public static object Create(Type type)
+        public static object MapTo(Type type)
         {
             return new PocoSettingsBuilder(type, _provider).Create();
         }

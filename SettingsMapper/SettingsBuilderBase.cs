@@ -6,7 +6,7 @@ using SettingsMapper.Converters;
 namespace SettingsMapper
 {
     /// <summary>
-    /// Provides base functionality to bind raw settings to target types.
+    /// Provides base functionality to map raw settings to target types.
     /// </summary>
     public abstract class SettingsBuilderBase
     {
@@ -14,9 +14,9 @@ namespace SettingsMapper
         private readonly List<ISettingConverter> _converters;
 
         /// <summary>
-        /// Gets binder for settings-to-type conversion.
+        /// Gets mapper for settings-to-type conversion.
         /// </summary>
-        internal abstract IBinder Binder { get; }
+        internal abstract IMapper Mapper { get; }
 
         /// <summary>
         /// Initializes a new instance of <see cref="SettingsBuilderBase"/>.
@@ -55,8 +55,8 @@ namespace SettingsMapper
         /// <param name="prefix">Setting name prefix.</param>
         internal virtual object Build(Type targetType, string prefix = null)
         {
-            var target = Binder.CreateTarget(targetType);
-            var props = Binder.GetProps(targetType).ToList();
+            var target = Mapper.CreateTarget(targetType);
+            var props = Mapper.GetProps(targetType).ToList();
 
             foreach (var prop in props)
             {
@@ -69,7 +69,7 @@ namespace SettingsMapper
                     {
                         string newPrefix = (prefix ?? "") + (prop.CustomPrefix ?? name) + ".";
                         object inner = Build(type, newPrefix);
-                        Binder.Bind(target, targetType, name, inner);
+                        Mapper.Map(target, targetType, name, inner);
                         continue;
                     }
                     catch (Exception ex)
@@ -93,13 +93,13 @@ namespace SettingsMapper
 
                 if (type == typeof(string))
                 {
-                    Binder.Bind(target, targetType, name, stringValue);
+                    Mapper.Map(target, targetType, name, stringValue);
                     continue;
                 }
 
                 ISettingConverter converter = _converters.First(c => c.CanConvert(type));
                 object convertedValue = converter.Convert(stringValue, type);
-                Binder.Bind(target, targetType, name, convertedValue);
+                Mapper.Map(target, targetType, name, convertedValue);
             }
 
             return target;

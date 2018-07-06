@@ -6,9 +6,9 @@ using System.Reflection;
 namespace SettingsMapper
 {
     /// <summary>
-    /// Binder for Poco objects.
+    /// Mapper for Poco objects.
     /// </summary>
-    internal class PocoBinder : IBinder
+    internal class PocoMapper : IMapper
     {
         /// <inheritdoc />
         public object CreateTarget(Type targetType) => Activator.CreateInstance(targetType);
@@ -20,7 +20,7 @@ namespace SettingsMapper
                 .Select(BindingProp.FromProperty);
 
         /// <inheritdoc />
-        public void Bind(object target, Type targetType, string name, object value)
+        public void Map(object target, Type targetType, string name, object value)
             => targetType.GetProperty(name).SetValue(target, value, null);
     }
 }
