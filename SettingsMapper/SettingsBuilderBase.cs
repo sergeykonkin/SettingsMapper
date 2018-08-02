@@ -13,6 +13,8 @@ namespace SettingsMapper
         private readonly ISettingsProvider _settingsProvider;
         private readonly List<ISettingConverter> _converters;
 
+        public string PrefixDelimiter { get; set; } = ":";
+
         /// <summary>
         /// Gets mapper for settings-to-type conversion.
         /// </summary>
@@ -66,7 +68,7 @@ namespace SettingsMapper
                 {
                     try
                     {
-                        string newPrefix = (prefix ?? "") + (prop.CustomPrefix ?? prop.SettingName) + ".";
+                        string newPrefix = (prefix ?? "") + (prop.CustomPrefix ?? prop.SettingName) + PrefixDelimiter;
                         object inner = Build(type, newPrefix);
                         Mapper.Map(target, targetType, prop.PropName, inner);
                         continue;
