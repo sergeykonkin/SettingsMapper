@@ -32,7 +32,7 @@ namespace SettingsMapper.Tests
             var settingsType = typeof(Model.PocoWithInner);
             var settingsProvider = new Mock<ISettingsProvider>();
             var objectSettingsBuilder = new ObjectSettingsBuilder(settingsType, settingsProvider.Object);
-            settingsProvider.Setup(sp => sp.Get("Inner.Int")).Returns("5");
+            settingsProvider.Setup(sp => sp.Get("Inner:Int")).Returns("5");
 
             var result = (Model.PocoWithInner)objectSettingsBuilder.Create();
 
@@ -48,7 +48,7 @@ namespace SettingsMapper.Tests
             var settingsType = typeof(Model.PocoWithAttributes);
             var settingsProvider = new Mock<ISettingsProvider>();
             var objectSettingsBuilder = new ObjectSettingsBuilder(settingsType, settingsProvider.Object);
-            settingsProvider.Setup(sp => sp.Get("foo.Int")).Returns("10");
+            settingsProvider.Setup(sp => sp.Get("foo:Int")).Returns("10");
             settingsProvider.Setup(sp => sp.Get("Bar")).Returns("1.1");
             settingsProvider.Setup(sp => sp.Get("String")).Returns("Value");
 

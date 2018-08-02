@@ -29,8 +29,8 @@ namespace SettingsMapper.Tests
         {
             var settingsProvider = new Mock<ISettingsProvider>();
             var staticSettingsBuilder = new StaticSettingsBuilder(settingsProvider.Object);
-            settingsProvider.Setup(sp => sp.Get("Inner.Int")).Returns("5");
-            settingsProvider.Setup(sp => sp.Get("foo.Int")).Returns("10");
+            settingsProvider.Setup(sp => sp.Get("Inner:Int")).Returns("5");
+            settingsProvider.Setup(sp => sp.Get("foo:Int")).Returns("10");
 
             staticSettingsBuilder.MapTo(typeof(Model.StaticWithInner));
 
@@ -46,8 +46,8 @@ namespace SettingsMapper.Tests
         public void StaticSettingsBuilderShouldMapNestedClasses()
         {
             var settingsProvider = new Mock<ISettingsProvider>();
-            settingsProvider.Setup(sp => sp.Get("Nested.Int")).Returns("5");
-            settingsProvider.Setup(sp => sp.Get("foo.Int")).Returns("10");
+            settingsProvider.Setup(sp => sp.Get("Nested:Int")).Returns("5");
+            settingsProvider.Setup(sp => sp.Get("foo:Int")).Returns("10");
 
             var staticSettingsBuilder = new StaticSettingsBuilder(settingsProvider.Object);
 
@@ -65,7 +65,7 @@ namespace SettingsMapper.Tests
             var settingsType = typeof(Model.StaticWithAttributes);
             var settingsProvider = new Mock<ISettingsProvider>();
             var staticSettingsBuilder = new StaticSettingsBuilder(settingsProvider.Object);
-            settingsProvider.Setup(sp => sp.Get("foo.Int")).Returns("10");
+            settingsProvider.Setup(sp => sp.Get("foo:Int")).Returns("10");
             settingsProvider.Setup(sp => sp.Get("Bar")).Returns("1.1");
             settingsProvider.Setup(sp => sp.Get("String")).Returns("Value");
 
