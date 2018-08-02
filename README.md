@@ -15,7 +15,7 @@ An `App.config` file:
         <add key="DateTime" value="2018-04-21T12:34:56.789Z" />
         <add key="ArrayOfTimeSpans" value="00:00:05, 00:00:10, 00:00:15" />
         <add key="NullableBoolean" value="null" />
-        <add key="MyType.InnerProp" value="7" />
+        <add key="MyType:InnerProp" value="7" />
     </appSettings>
 </configuration>
 ```
