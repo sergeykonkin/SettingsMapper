@@ -13,6 +13,8 @@ namespace SettingsMapper.Tests
             settingsProvider.Setup(sp => sp.Get("Int")).Returns("5");
             settingsProvider.Setup(sp => sp.Get("String")).Returns("foo");
             settingsProvider.Setup(sp => sp.Get("NullableDouble")).Returns(null as string);
+            settingsProvider.Setup(sp => sp.Get("Field")).Returns("baz");
+
             var staticSettingsBuilder = new StaticSettingsBuilder(settingsProvider.Object);
 
             staticSettingsBuilder.MapTo(typeof(Model.Static));
@@ -20,7 +22,8 @@ namespace SettingsMapper.Tests
             Assert.AreEqual(5, Model.Static.Int);
             Assert.AreEqual("foo", Model.Static.String);
             Assert.AreEqual(null, Model.Static.NullableDouble);
-            settingsProvider.Verify(sp => sp.Get(It.IsAny<string>()), Times.Exactly(3));
+            Assert.AreEqual("baz", Model.Static.Field);
+            settingsProvider.Verify(sp => sp.Get(It.IsAny<string>()), Times.Exactly(4));
         }
 
         [Test(TestOf = typeof(StaticSettingsBuilder))]

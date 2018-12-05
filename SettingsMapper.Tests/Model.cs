@@ -11,6 +11,8 @@ namespace SettingsMapper.Tests
             public int Int { get; set; }
             public string String { get; set; }
             public double? NullableDouble { get; set; }
+
+            public string Field;
         }
 
         public class PocoWithInner
@@ -39,6 +41,8 @@ namespace SettingsMapper.Tests
             public static int Int { get; set; }
             public static string String { get; set; }
             public static double? NullableDouble { get; set; }
+
+            public static string Field;
         }
 
         public static class StaticWithInner

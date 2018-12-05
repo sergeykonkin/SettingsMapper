@@ -11,6 +11,7 @@ namespace SettingsMapper.Tests
         [TestCase("Int", 5, TestName = PocoMapperTestName)]
         [TestCase("String", "foobar", TestName = PocoMapperTestName)]
         [TestCase("NullableDouble", null, TestName = PocoMapperTestName)]
+        [TestCase("Field", "baz", TestName = PocoMapperTestName)]
         public void PocoMapperTest(string propName, object value)
         {
             var pocoMapper = new ObjectMapper();
@@ -19,8 +20,8 @@ namespace SettingsMapper.Tests
 
             pocoMapper.Map(target, targetType, propName, value);
 
-            var prop = target.GetType().GetProperty(propName);
-            var result = prop.GetValue(target);
+            var member = target.GetType().GetWritableMember(propName);
+            var result = member.GetValue(target);
 
             Assert.AreEqual(value, result);
         }
@@ -30,6 +31,7 @@ namespace SettingsMapper.Tests
         [TestCase("Int", 5, TestName = StaticMapperTestName)]
         [TestCase("String", "foobar", TestName = StaticMapperTestName)]
         [TestCase("NullableDouble", null, TestName = StaticMapperTestName)]
+        [TestCase("Field", "baz", TestName = StaticMapperTestName)]
         public void StaticMapperTest(string propName, object value)
         {
             var staticMapper = new StaticMapper();
@@ -38,8 +40,8 @@ namespace SettingsMapper.Tests
 
             staticMapper.Map(target, targetType, propName, value);
 
-            var prop = typeof(Model.Static).GetProperty(propName);
-            var result = prop.GetValue(null);
+            var member = typeof(Model.Static).GetWritableMember(propName);
+            var result = member.GetValue(null);
 
             Assert.AreEqual(value, result);
         }

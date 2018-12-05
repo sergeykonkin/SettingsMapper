@@ -13,6 +13,8 @@ namespace SettingsMapper.Tests
             settingsProvider.Setup(sp => sp.Get("Int")).Returns("5");
             settingsProvider.Setup(sp => sp.Get("String")).Returns("foobar");
             settingsProvider.Setup(sp => sp.Get("NullableDouble")).Returns(null as string);
+            settingsProvider.Setup(sp => sp.Get("Field")).Returns("baz");
+
             var pocoSettingsBuilder = new PocoSettingsBuilder<Model.Poco>(settingsProvider.Object);
 
             var result = pocoSettingsBuilder.Create();
@@ -20,8 +22,9 @@ namespace SettingsMapper.Tests
             Assert.AreEqual(5, result.Int);
             Assert.AreEqual("foobar", result.String);
             Assert.AreEqual(null, result.NullableDouble);
+            Assert.AreEqual("baz", result.Field);
 
-            settingsProvider.Verify(sp => sp.Get(It.IsAny<string>()), Times.Exactly(3));
+            settingsProvider.Verify(sp => sp.Get(It.IsAny<string>()), Times.Exactly(4));
         }
 
         [Test(TestOf = typeof(PocoSettingsBuilder<Model.PocoWithInner>))]

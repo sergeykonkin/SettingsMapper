@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 
 namespace SettingsMapper
 {
@@ -20,9 +19,8 @@ namespace SettingsMapper
         /// <inheritdoc />
         public IEnumerable<BindingProp> GetProps(Type targetType) =>
             targetType
-                .GetProperties(BindingFlags.Public | BindingFlags.Static | BindingFlags.Instance)
-                .Where(prop => prop.CanWrite)
-                .Select(BindingProp.FromProperty)
+                .GetWritableMembers()
+                .Select(BindingProp.FromMemberInfo)
                 .Union(
                     targetType
                         .GetNestedTypes()
@@ -31,6 +29,6 @@ namespace SettingsMapper
 
         /// <inheritdoc />
         public void Map(object target, Type targetType, string name, object value)
-            => targetType.GetProperty(name)?.SetValue(target, value, null);
+            => targetType.GetWritableMember(name)?.SetValue(target, value);
     }
 }

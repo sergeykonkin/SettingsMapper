@@ -37,12 +37,12 @@ namespace SettingsMapper
                 IsIgnored = GetIgnoredAttr(type)
             };
 
-        public static BindingProp FromProperty(PropertyInfo prop) =>
+        public static BindingProp FromMemberInfo(MemberInfo prop) =>
             new BindingProp
             {
                 PropName = prop.Name,
                 SettingName = GetNameAttr(prop),
-                Type = prop.PropertyType,
+                Type = prop.GetMemberType(),
                 CustomPrefix = GetPrefixAttr(prop),
                 DefaultValue = GetDefaultAttr(prop),
                 IsIgnored = GetIgnoredAttr(prop)
